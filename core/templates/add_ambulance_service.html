@@ -1,0 +1,64 @@
+{% extends 'dashboardbase.html' %}
+
+        {% block title %}Dashboard{% endblock %}
+
+        {% block content %}
+            {% load static %}
+                <div class="row" style="margin-top: 20px">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="row">
+                                <div class="col-md-6">
+                                    {{ new_ambulance_service_form.name }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ new_ambulance_service_form.country }}
+                                </div>
+                                <div class="col-md-6">
+                        {{ new_ambulance_service_form.area_of_operation }}
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_service_form.email }}
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_service_form.mobile }}
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_service_form.region }}
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_service_form.town }}
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_service_form.contact_person_first_name }}
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_service_form.contact_person_last_name }}
+                                </div>
+
+                                <div class="col-md-6">
+{{ new_ambulance_service_form.contact_person_phone_number }}
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_service_form.contact_person_email }}
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_service_form.contact_person_address }}
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-rounded btn-danger">     Register      </button>
+                                </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                       
+
+        {% endblock %}

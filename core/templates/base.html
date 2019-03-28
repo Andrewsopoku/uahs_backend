@@ -1,0 +1,282 @@
+<html lang="en" class="full-height">
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="full-height">
+
+
+<head>
+    <!-- Required meta tags always come first -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>UAHS</title>
+
+<link rel="stylesheet" href="{% static 'home/css/font-awesome.min.css' %}">
+        <!-- Bootstrap core CSS -->
+
+        <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="{% static 'home/css/mdb.min.css' %}" rel="stylesheet">
+        <link href="{% static 'home/css/iziToast.min.css' %}" rel="stylesheet">
+
+    <style>
+
+        .intro-2 {
+            background: url("https://mdbootstrap.com/img/Photos/Others/img%20(46).jpg")no-repeat center center;
+            background-size: cover;
+        }
+        .top-nav-collapse {
+            background-color: #ff8a65 !important;
+        }
+        .navbar:not(.top-nav-collapse) {
+            background: transparent !important;
+        }
+        @media (max-width: 768px) {
+            .navbar:not(.top-nav-collapse) {
+                background: #ff8a65 !important;
+            }
+        }
+        .md-form .prefix {
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+        h6 {
+            line-height: 1.7;
+        }
+        @media (max-width: 740px) {
+            .full-height,
+            .full-height body,
+            .full-height header,
+            .full-height header .view {
+                height: 1100px;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="developer">
+
+    <!--Main Navigation-->
+    <header>
+
+
+        <!--Navbar-->
+        <nav class="navbar navbar-expand-lg navbar-inverse fixed-top navbar- scrolling-navbar">
+            <div class="container">
+                <a class="navbar-brand waves-effect waves-light" href="#"><strong>UAHS</strong></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-7" aria-controls="navbarSupportedContent-7" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent-7">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link waves-effect waves-light" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light" href="#">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link waves-effect waves-light" href="#">Contact</a>
+                        </li>
+                    </ul>
+                    <a href="" class="btn btn-rounded btn-green">Login</a>
+                </div>
+            </div>
+        </nav>
+
+
+         {% block content %}{% endblock %}
+        <!-- Main content -->
+
+				<!--Footer-->
+    <footer class="page-footer text-center text-md-left stylish-color-dark pt-0">
+
+        <div style="background-color: #ffcc33;">
+            <div class="container">
+                <!--Grid row-->
+                <div class="row py-4 d-flex align-items-center">
+
+                    <!--Grid column-->
+                    <div class="col-md-6 col-lg-5 text-center text-md-left mb-md-0">
+                        <h6 class="mb-0 white-text">Get connected with us on social networks!</h6>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-6 col-lg-7 text-center text-md-right">
+                        <!--Facebook-->
+                        <a class="p-2 m-2 fa-lg fb-ic ml-0"><i class="fa fa-facebook white-text mr-lg-4"> </i></a>
+                        <!--Twitter-->
+                        <a class="p-2 m-2 fa-lg tw-ic"><i class="fa fa-twitter white-text mr-lg-4"> </i></a>
+                        <!--Google +-->
+                        <a class="p-2 m-2 fa-lg gplus-ic"><i class="fa fa-google-plus white-text mr-lg-4"> </i></a>
+                        <!--Linkedin-->
+                        <a class="p-2 m-2 fa-lg li-ic"><i class="fa fa-linkedin white-text mr-lg-4"> </i></a>
+                        <!--Instagram-->
+                        <a class="p-2 m-2 fa-lg ins-ic"><i class="fa fa-instagram white-text mr-lg-4"> </i></a>
+                    </div>
+                    <!--Grid column-->
+
+                </div>
+                <!--Grid row-->
+            </div>
+        </div>
+
+        <!--Footer Links-->
+        <div class="container mt-5 mb-4 text-center text-md-left">
+            <div class="row mt-3">
+
+                <!--First column-->
+                <div class="col-md-3 col-lg-4 col-xl-3 mb-4">
+                    <h6 class="text-uppercase font-weight-bold"><strong>UAHS</strong></h6>
+                    <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p></p>
+
+                </div>
+                <!--/.First column-->
+
+                <!--Second column-->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold"><strong>Products</strong></h6>
+                    <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p><a href="#!">UAHS Connect</a></p>
+                    <p><a href="#!">UAHS Personal Health Management</a></p>
+                    <p><a href="#!">UAHS Partners</a></p>
+
+                </div>
+                <!--/.Second column-->
+
+                <!--Third column-->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold"><strong>Useful links</strong></h6>
+                    <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p><a href="#!">Your Account</a></p>
+                    <p><a href="#!">Become A Member</a></p>
+                    <p><a href="#!">FAQ</a></p>
+                    <p><a href="#!">Terms And Conditions</a></p>
+                </div>
+                <!--/.Third column-->
+
+                <!--Fourth column-->
+                <div class="col-md-4 col-lg-3 col-xl-3">
+                    <h6 class="text-uppercase font-weight-bold"><strong>Contact</strong></h6>
+                    <hr class="blue mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p><i class="fa fa-home mr-3"></i> GA-000-0000 , East Legon </p>
+					<p><i class="fa fa-home mr-3"></i> AK-000-0000 , Kumasi</p>
+                    <p><i class="fa fa-envelope mr-3"></i> contact@uahs.com</p>
+                    <p><i class="fa fa-phone mr-3"></i> +233233xxxxxx</p>
+                </div>
+                <!--/.Fourth column-->
+
+            </div>
+        </div>
+        <!--/.Footer Links-->
+
+        <!-- Copyright-->
+        <div class="footer-copyright py-3 text-center wow fadeIn" data-wow-delay="0.3s">
+            <div class="container-fluid">
+                © 2019 Copyright: <a href="#home" target="_blank"> uahs.com <span>- By UAHS Medical Services</span></a>
+			</div>
+        </div>
+        <!--/.Copyright -->
+
+    </footer>
+    <!--/.Footer-->
+
+        <!-- JQuery -->
+        <script type="text/javascript" src="{% static 'home/js/jquery-3.3.1.min.js' %}"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="{% static 'home/js/popper.min.js' %}"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="{% static 'home/js/bootstrap.js' %}"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="{%  static 'home/js/mdb.min.js' %}"></script>
+         <script type="text/javascript" src="{% static 'home/js/custom.js' %}"></script>
+        <!--Toast -->
+        <script type="text/javascript" src="{% static 'home/js/iziToast.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'home/js/dashchart.js' %}"></script>
+
+        <script>
+
+            toastr.options = {
+                        "closeButton": true, // true/false
+                        "debug": false, // true/false
+                        "newestOnTop": false, // true/false
+                        "progressBar": true, // true/false
+                        "positionClass": "toast-top-center", // toast-top-right / toast-top-left / toast-bottom-right / toast-bottom-left
+                        "preventDuplicates": true,
+                        "onclick": null,
+                        "showDuration": "300", // in milliseconds
+                        "hideDuration": "1000", // in milliseconds
+                        "timeOut": "5000", // in milliseconds
+                        "extendedTimeOut": "1000", // in milliseconds
+                        "showEasing": "swing",
+                        "hideEasing": "linear",
+                        "showMethod": "fadeIn",
+                        "hideMethod": "fadeOut"
+                    }
+
+
+        </script>
+
+ {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'error' %}
+            <script type="text/javascript">
+
+                iziToast.error({
+                    message: '{{ message|safe }}',
+
+                    position: 'topCenter'
+                });
+            </script>
+            {% else %}
+                <script type="text/javascript">
+                iziToast.success({
+                    message: '{{ message|safe }}',
+
+                    position: 'topCenter'
+                });
+                </script>
+            {% endif %}
+
+        {% endfor %}
+    {% endif %}
+
+
+        <script>
+            //Animation init
+            new WOW().init();
+
+            //Modal
+            $('#myModal').on('shown.bs.modal', function () {
+                $('#myInput').focus()
+            })
+
+            // Material Select Initialization
+            $(document).ready(function () {
+                $('.mdb-select').material_select();
+
+            });
+
+
+        </script>
+
+        <script>
+            $(function () {
+                var selectedClass = "";
+                $(".filter").click(function () {
+                    selectedClass = $(this).attr("data-rel");
+                    $("#gallery").fadeTo(100, 0.1);
+                    $("#gallery div").not("." + selectedClass).fadeOut().removeClass('animation');
+                    setTimeout(function () {
+                        $("." + selectedClass).fadeIn().addClass('animation');
+                        $("#gallery").fadeTo(300, 1);
+                    }, 300);
+                });
+            });
+        </script>
+    </body>
+</html>

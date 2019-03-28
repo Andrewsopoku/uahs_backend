@@ -1,0 +1,242 @@
+*{
+box-sizing:border-box!important;	
+}
+/*Another test */
+	
+ html,
+        body,
+        header,
+        .intro-2 {
+          height: 100%;
+        }
+
+        @media (max-width: 740px) {
+          html,
+          body,
+          header,
+          .intro-2 {
+            height: 900px;
+          }
+        }
+
+        @media (min-width: 800px) and (max-width: 850px) {
+            html,
+            body,
+            header,
+            .intro-2 {
+              height: 980px;
+            }
+        }
+        @media (min-width: 800px) and (max-width: 850px) {
+            .navbar:not(.top-nav-collapse) {
+                background: #5991fb!important;
+            }
+            .navbar {
+              box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12) !important;
+            }
+        }
+@media (max-width:330px){
+		   .logo-style{
+			     height:50px!important;
+				width:30px!important;
+					margin-right:70px!important;
+	                margin-left:15px!important;
+			}
+		}
+		@media (max-width:216px){
+		   .logo-style{
+			     height:50px!important;
+				width:30px!important;
+					margin-right:40px!important;
+	                margin-left:5px!important;
+			}
+		}
+@media (max-width: 768px) {
+            .navbar:not(.top-nav-collapse) {
+                background-image: linear-gradient(to bottom right,#f5ce25,#f5c400) !important;
+            }
+            .navbar {
+              box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12) !important;
+            }
+        }
+		@media (max-width:768px;) {
+       .margins {
+        margin-left: 2rem;
+		margin-bottom: 1rem;
+    }
+}
+@media (min-width:768px) and (max-width:992px){
+	 .navbar:not(.top-nav-collapse) {
+                background-image: linear-gradient(to bottom right,#f5ce25,#f5c400) !important;
+            }
+	  .navbar {
+              box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12) !important;
+            }
+} 	
+@media (max-width:330px){
+		   .logo-style{
+			     height:50px!important;
+				width:30px!important;
+					margin-right:70px!important;
+	                margin-left:15px!important;
+			}
+		}
+		@media (max-width:216px){
+		   .logo-style{
+			     height:50px!important;
+				width:30px!important;
+					margin-right:40px!important;
+	                margin-left:5px!important;
+			}
+		}	
+		.logo-style{
+	box-sizing:border-box;
+	height:70px;
+	width:50px;
+	margin-right:50px!important;
+	margin-left:25px!important;
+}
+.navbar{
+   box-shadow:none!important;
+   border:none!important;
+}
+
+@media (min-width:768px) and (max-width:992px){
+	 .navbar:not(.top-nav-collapse) {
+                background-image: linear-gradient(to bottom right,#f5ce25,#f5c400) !important;
+            }
+	  .navbar {
+              box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12) !important;
+            }
+} 
+
+.logo-style{
+	box-sizing:border-box;
+	height:70px;
+	width:50px;
+	margin-right:150px;
+	margin-left:30px;
+}
+
+.top-nav-collapse {
+    background-image: linear-gradient(to bottom right,#f5ce25,#f5c400) !important;
+}
+.nav-link{
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 16px;
+    line-height: 30px;
+    font-weight: 600;
+    font-family: 'Roboto', Arial, Tahoma, sans-serif;
+
+}
+.nav-link:hover{
+    color: #333!important;
+}
+.nav-link:active{
+    color: #333!important;
+}
+.modalbtn{
+	background-color:#ffcc33!important;
+	color:#fff!important;
+}
+
+.btnstyle{
+     
+	font-weight:500;
+	color:#ffcc33!important;
+	background-color:#fff;
+}
+.no-account-style{
+	color:gray;
+	text-align:center!important;
+}
+.mybtn-color{
+	background: linear-gradient(to bottom right,  #f5ce25, #f5c400);
+}
+.mycard-color{
+	background: linear-gradient(to right, #fff, #fff); 
+}
+input .inputstyle{
+	border-bottom: 1px solid #ffcc33!important;
+}
+
+.contentcolor{
+	color:#ffcc33;
+}
+
+.text-color{
+	color:gray;
+}
+.text-uppercase{
+	text-transform:uppercase;
+}
+.pic-col{
+	margin-top:-100px!important;
+}
+.pic-card{
+	background: linear-gradient(to right, #ffeeee, #ddefbb); 
+}
+#imgId{
+  width: 150px;
+  height:150px;
+  border-radius:50%;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.16), 0 2px 10px 0 rgba(0,0,0,.12);
+  }  
+
+.maritalstyle{
+	margin-right:20px!important;
+	color:gray;
+}
+.emerstyle{
+	color:gray;
+}
+
+.my-chip-style{
+		background: linear-gradient(to right,  #d53369, #cbad6d);
+}
+#others .chip{
+	background-color: #4285f4;
+	color:#fff;
+}
+#currentmed .chip{
+	background-color: #4285f4;
+	color:#fff;
+}
+#surgeries .chip{
+	background-color: #4285f4;
+	color:#fff;
+}
+.chips .input{
+	width:200px!important;	
+}
+.card-color{
+	background-color:#ffcc33;
+}
+.contentimg{
+	margin-left:41%;
+}
+
+.whiteBG{
+	background-color:#fff;
+}
+.lablestyle{
+	margin-top:-10px!important;
+}
+.textarea-style{
+	resize:vertical!important;
+}
+.section-hr{
+	margin: 70px!important;
+}
+
+#mdpill-style ul .nav-link{
+	border:none!important;
+	color:#666!important;
+	box-shadow:none!important;
+}
+.md-pills .nav-link.active {
+    color: #fff!important;
+	background-color:#ffcc33!important;
+
+}

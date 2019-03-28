@@ -1,0 +1,42 @@
+{% extends 'dashboardbase.html' %}
+
+        {% block title %}Dashboard{% endblock %}
+
+        {% block content %}
+            {% load static %}
+                <div class="row" style="margin-top: 20px">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="row">
+
+                                <div class="col-md-6">
+                                    {{ new_ambulance_form.registration_number }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ new_ambulance_form.dominant_color }}
+                                </div>
+
+                                <div class="col-md-6">
+                        {{ new_ambulance_form.car_model }}
+                                </div>
+                                <div class="col-md-6">
+                        {{ new_ambulance_form.make_year }}
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-rounded btn-danger">     Add  Ambulance   </button>
+                                </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                       
+
+        {% endblock %}

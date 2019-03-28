@@ -1,0 +1,61 @@
+{% extends 'dashboardbase.html' %}
+
+        {% block title %}Dashboard{% endblock %}
+
+        {% block content %}
+            {% load static %}
+                <div class="row" style="margin-top: 20px">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="row">
+
+                                <div class="col-md-6">
+                                    {{ new_ambulance_driver_form.first_name }}
+                                </div>
+                                <div class="col-md-6">
+                                    {{ new_ambulance_driver_form.surname }}
+                                </div>
+                                <div class="col-md-6 ">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        {{ new_ambulance_driver_form.sex }}
+                                    </div>
+
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_driver_form.email }}
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_driver_form.nationality }}
+                                </div>
+                                <div class="col-md-6">
+{{ new_ambulance_driver_form.mobile }}
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Date of Birth</label>
+{{ new_ambulance_driver_form.date_of_birth }}
+                                </div>
+                                <div class="col-md-6">
+                                    <label></label>
+{{ new_ambulance_driver_form.address }}
+                                </div>
+                                 <div class="col-md-6">
+                                    <label></label>
+{{ new_ambulance_driver_form.driver_license_number }}
+                                </div>
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-rounded btn-danger">     Add  Driver    </button>
+                                </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                       
+
+        {% endblock %}
