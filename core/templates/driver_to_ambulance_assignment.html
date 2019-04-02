@@ -11,7 +11,8 @@
                             <div class="card-body">
 
                                 <h4 class="header-title">Assign driver to ambulance</h4>
-                                <form></form>
+                                <form method="post">
+                                    {% csrf_token %}
                                 <div class="row">
                                     <div class="col-md-4">
                                     <label>Driver</label>
@@ -26,6 +27,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -48,7 +50,7 @@
                                         <tbody>
                                         {% for i in assignments %}
                                             <tr>
-                                                <td>{{ i.driver.driver_license_number }}</td>
+                                                <td>{{ i.driver.user.first_name }} {{ i.driver.user.surname }}</td>
                                                 <td>{{ i.ambulance.registration_number }}</td>
                                                 <td>{{ i.status }}</td>
 

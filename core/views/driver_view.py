@@ -26,15 +26,18 @@ def assign_driver_to_ambulance(request,pk):
 
             driver = assigndriverambulance.cleaned_data['driver']
             ambulance = assigndriverambulance.cleaned_data['ambulance']
-            messages.success(request, 'Login successful')
-            #return redirect('core:dashboard')
-            #return redirect('core:dashboard')
+            driver_assignment = AmbulanceDriver.objects.get(id=driver)
+            ambulance_assignment = Ambulance.objects.get(id=driver)
 
-            messages.error(request, 'Wrong username or password')
+            assignment = AmbulanceDriverAssignment(driver=driver_assignment,
+                                                   ambulance=ambulance_assignment,
+                                                   ambulance_service=ambulance_service)
+            assignment.save()
+            messages.success(request, 'Driver Ambulance Assignment Successful')
 
     assigndriverambulance = AssignDriverAmbulance(amb_service=ambulance_service)
     assignments = AmbulanceDriverAssignment.objects.filter(
         ambulance_service=ambulance_service)
-    context = {'assigndriverambulance':assigndriverambulance,}
+    context = {'assigndriverambulance':assigndriverambulance,'assignments':assignments}
     return render(request,'driver_to_ambulance_assignment.html',context)
 

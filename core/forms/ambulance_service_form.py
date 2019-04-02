@@ -13,8 +13,8 @@ class AssignDriverAmbulance(forms.Form, ):
                                                          )), Ambulance.objects.filter(ambulance_service=amb_service))
         self.fields['ambulance'].choices = choices
 
-        choices = map(lambda driver: (driver.id, '{}'.format(driver.driver_license_number,
-                                                                   )),
+        choices = map(lambda driver: (driver.id, '{} {}'.format(driver.user.first_name,
+                                                                driver.user.surname)),
                       AmbulanceDriver.objects.filter(ambulance_service=amb_service))
         self.fields['driver'].choices = choices
 

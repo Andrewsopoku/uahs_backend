@@ -5,5 +5,8 @@ register = template.Library()
 
 @register.filter(name='has_group')
 def has_group(user, group_name):
-    group = Group.objects.get(name=group_name)
-    return True if group in user.groups.all() else False
+    group = Group.objects.filter(name=group_name)
+    if group:
+        return True if group[0] in user.groups.all() else False
+    else:
+        return False
