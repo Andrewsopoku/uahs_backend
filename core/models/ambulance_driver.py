@@ -8,3 +8,5 @@ class AmbulanceDriver(models.Model):
     user = models.ForeignKey(AuthUserDemographic, on_delete=models.CASCADE, null=True)
     driver_license_number = models.CharField(max_length= 255,null=True)
     ambulance_service = models.ForeignKey(AmbulanceService,on_delete=models.CASCADE, null=True)
+    status = models.CharField(max_length=255, null=True, default= "Active")
+    driver_assigned = models.BooleanField(default=False)

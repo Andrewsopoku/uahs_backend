@@ -19,6 +19,7 @@ def add_ambulance(request,pk):
             ambulance = Ambulance(registration_number=registration_number,dominant_color=dominant_color,
                                   car_model=car_model,make_year=make_year,ambulance_service=ambulance_service,
                                   is_for_ambulance_service=True)
+            ambulance.save()
 
             messages.success(request, "Ambulance  Added Successfully")
 
@@ -31,3 +32,8 @@ def add_ambulance(request,pk):
     context = {'new_ambulance_form': new_ambulance_form }
     return render(request, 'add_ambulance.html', context)
 
+def list_ambulance(request,pk):
+    ambulance_service = AmbulanceService.objects.get(id=pk)
+    ambulance_list = Ambulance.objects.filter(ambulance_service=ambulance_service)
+    context = {"ambulance_list":ambulance_list}
+    return render(request, 'ambulance_list.html',context)

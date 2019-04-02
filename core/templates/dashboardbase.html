@@ -1,4 +1,5 @@
 {% load static %}
+{% load has_group %}
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -56,6 +57,43 @@
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
+
+
+                    {% if request.user|has_group:"Ambulance Admin" %}
+                                <li class="active">
+                                <a href="{% url 'core:dashboard' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Dashboard</span></a>
+
+                            </li>
+
+                        <li class="">
+                                <a href="{% url 'core:ambulance-service-detail' pk=request.company.id %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Company </span></a>
+
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Ambulance
+
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="{% url 'core:add-ambulance' pk=request.company.id %}">Add</a></li>
+                                    <li><a href="{% url 'core:ambulance-list' pk=request.company.id %}">View </a></li>
+                                    <li><a href="{% url 'core:view-ambulance-service' %}">Assign Driver </a></li>
+                                </ul>
+                            </li>
+
+                           <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Driver
+
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="{% url 'core:add-ambulance-driver' pk=request.company.id %}">Add</a></li>
+                                    <li><a href="{% url 'core:view-ambulance-driver' pk=request.company.id %}">View </a></li>
+                                </ul>
+                            </li>
+                        <li>
+                        <a href="{% url 'core:dashboard' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Reports</span></a>
+                        </li>
+
+                    {% else %}
                             <li class="active">
                                 <a href="{% url 'core:dashboard' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
 
@@ -77,6 +115,8 @@
 
                                 </ul>
                             </li>
+
+                    {% endif %}
 
 
 
@@ -112,10 +152,10 @@
                             <li id="full-view-exit"><i class="ti-zoom-out"></i></li>
                             <li class="dropdown">
                                 <i class="ti-bell dropdown-toggle" data-toggle="dropdown">
-                                    <span>2</span>
+                                    <span>1</span>
                                 </i>
                                 <div class="dropdown-menu bell-notify-box notify-box">
-                                    <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
+                                    <span class="notify-title">You have 1 new notifications <a href="#">view all</a></span>
                                     <div class="nofity-list">
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
@@ -127,93 +167,30 @@
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
                                             <div class="notify-text">
-                                                <p>New Commetns On Post</p>
-                                                <span>30 Seconds ago</span>
+                                                <p>Welcome Message</p>
+                                                <span>First time user, we welcome you</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
-                                            <div class="notify-text">
-                                                <p>Some special like you</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-comments-smiley btn-info"></i></div>
-                                            <div class="notify-text">
-                                                <p>New Commetns On Post</p>
-                                                <span>30 Seconds ago</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-primary"></i></div>
-                                            <div class="notify-text">
-                                                <p>Some special like you</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                            <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb"><i class="ti-key btn-danger"></i></div>
-                                            <div class="notify-text">
-                                                <p>You have Changed Your Password</p>
-                                                <span>Just Now</span>
-                                            </div>
-                                        </a>
+
                                     </div>
                                 </div>
                             </li>
                             <li class="dropdown">
-                                <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>3</span></i>
+                                <i class="fa fa-envelope-o dropdown-toggle" data-toggle="dropdown"><span>1</span></i>
                                 <div class="dropdown-menu notify-box nt-enveloper-box">
-                                    <span class="notify-title">You have 3 new notifications <a href="#">view all</a></span>
+                                    <span class="notify-title">You have 1 new messages <a href="#">view all</a></span>
                                     <div class="nofity-list">
                                         <a href="#" class="notify-item">
                                             <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img1.jpg" alt="image">
+                                                <img src="{% static 'images/author/avatar.png' %}" alt="image">
                                             </div>
                                             <div class="notify-text">
-                                                <p>Dan</p>
-                                                <span class="msg">Hey I am waiting for you...</span>
+                                                <p>Admin</p>
+                                                <span class="msg">You can add drivers to your Ambulance service</span>
                                                 <span>3:15 PM</span>
                                             </div>
                                         </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img2.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Andrews</p>
-                                                <span class="msg">When you can connect with me...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img3.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Dan</p>
-                                                <span class="msg">I missed you so much...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
-                                        <a href="#" class="notify-item">
-                                            <div class="notify-thumb">
-                                                <img src="assets/images/author/author-img4.jpg" alt="image">
-                                            </div>
-                                            <div class="notify-text">
-                                                <p>Andy</p>
-                                                <span class="msg">Your product is completely Ready...</span>
-                                                <span>3:15 PM</span>
-                                            </div>
-                                        </a>
+
 
 
                                     </div>

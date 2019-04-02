@@ -1,0 +1,75 @@
+{% extends 'dashboardbase.html' %}
+
+        {% block title %}Dashboard{% endblock %}
+
+        {% block content %}
+            {% load static %}
+                <div class="row" style="margin-top: 20px">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <h4 class="header-title">Ambulances </h4>
+                                <div class="data-tables">
+                                    <table id="dataTable" class="text-center">
+                                        <thead class="bg-light text-capitalize">
+                                            <tr>
+                                                <th>Registration Number</th>
+                                                <th>Color</th>
+                                                <th>Make</th>
+                                                <th>Year</th>
+                                                <th>Status</th>
+                                                <th>Date added</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for i in ambulance_list %}
+                                            <tr>
+                                                <td>{{ i.registration_number }}</td>
+                                                <td>{{ i.dominant_color }}</td>
+                                                <td>{{ i.car_model }}</td>
+                                                <td>{{ i.make_year }}</td>
+                                                <td>{{ i.status }}</td>
+                                                <td>{{ i.created_at }}</td>
+                                                <td>
+
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-rounded btn-danger">View</button>
+                                                        <button type="button" class="btn btn-rounded btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(72px, 43px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                        {% if i.status == "Active" %}
+                                                            <a class="dropdown-item" href="{% url 'core:add-ambulance-driver' pk=i.id %}">Pend </a>
+                                                            <a class="dropdown-item" href="{% url 'core:add-ambulance-driver' pk=i.id %}">Remove </a>
+                                                             {% if i.driver_assigned == False %}
+                                                            <a class="dropdown-item" href="{% url 'core:add-ambulance-driver' pk=i.id %}">Assign Driver </a>
+                                                           {% endif %}
+                                                        {% endif %}
+                                                        {% if i.status == "Pendung" %}
+                                                            <a class="dropdown-item" href="{% url 'core:add-ambulance-driver' pk=i.id %}">Activate </a>
+                                                           {% endif %}
+
+                                                            <div class="dropdown-divider"></div>
+
+                                                        </div>
+                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                       
+
+        {% endblock %}

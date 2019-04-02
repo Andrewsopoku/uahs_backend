@@ -7,3 +7,4 @@ from core.models import ambulance
 from core.models import ambulance_service_admin
 from core.models import health_service
 from core.models import ambulance_driver
+from core.models import ambulance_driver_assignment

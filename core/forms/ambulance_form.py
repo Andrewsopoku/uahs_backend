@@ -13,4 +13,4 @@ class NewAmbulanceForm(forms.Form):
 
     make_year = forms.CharField(max_length=255, required=False,
                               widget=forms.TextInput
-                                  (attrs={'class': "form-control mb-4 input-rounded" ,'placeholder' :'Make'}), )
+                                  (attrs={'class': "form-control mb-4 input-rounded" ,'placeholder' :'Make Year'}), )

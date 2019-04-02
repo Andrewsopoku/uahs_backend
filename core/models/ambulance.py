@@ -14,5 +14,7 @@ class Ambulance(BaseModel):
     is_for_ambulance_service = models.BooleanField(default=True)
     is_for_health_service = models.BooleanField(default=False)
     ambulance_service = models.ForeignKey(AmbulanceService,on_delete=models.CASCADE, blank=True,null=True)
+    status = models.CharField(max_length=255, null=True, default= "Active")
+    driver_assigned = models.BooleanField(default=False)
     #health_service = models.ForeignKey(HealthService,on_delete=models.CASCADE, blank=True, null=True)
 
