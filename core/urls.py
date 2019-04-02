@@ -22,5 +22,6 @@ urlpatterns = [
     url('ambulance/(?P<pk>\d+)/add', ambulance_views.add_ambulance, name="add-ambulance"),
     url('ambulance/(?P<pk>\d+)/list', ambulance_views.list_ambulance, name="ambulance-list"),
     url('ambulance-service/(?P<pk>\d+)/add', ambulance_views.add_ambulance, name="add-ambulance"),
+    url('ambulance-service/(?P<pk>\d+)/driver/assign', driver_view.assign_driver_to_ambulance, name="assign-driver-ambulance"),
 
 ]

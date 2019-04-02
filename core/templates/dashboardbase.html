@@ -33,7 +33,7 @@
 
     <!-- modernizr css -->
     <script src="{% static 'js/vendor/modernizr-2.8.3.min.js' %}"></script>
-</head>
+    </head>
 
 <body>
     <!--[if lt IE 8]>
@@ -76,7 +76,7 @@
                                 <ul class="collapse">
                                     <li><a href="{% url 'core:add-ambulance' pk=request.company.id %}">Add</a></li>
                                     <li><a href="{% url 'core:ambulance-list' pk=request.company.id %}">View </a></li>
-                                    <li><a href="{% url 'core:view-ambulance-service' %}">Assign Driver </a></li>
+                                    <li><a href="{% url 'core:assign-driver-ambulance' pk=request.company.id %}">Assign Driver </a></li>
                                 </ul>
                             </li>
 
@@ -87,6 +87,8 @@
                                 <ul class="collapse">
                                     <li><a href="{% url 'core:add-ambulance-driver' pk=request.company.id %}">Add</a></li>
                                     <li><a href="{% url 'core:view-ambulance-driver' pk=request.company.id %}">View </a></li>
+                                    <li><a href="{% url 'core:assign-driver-ambulance' pk=request.company.id %}">Assign Ambulance </a></li>
+
                                 </ul>
                             </li>
                         <li>
@@ -464,6 +466,10 @@
     <script src="https://www.amcharts.com/lib/3/serial.js"></script>
     <script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js"></script>
     <script src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
     <!-- all line chart activation -->
     <script src="{% static 'js/line-chart.js' %}"></script>
     <!-- all pie chart -->
@@ -477,11 +483,14 @@
     <script src="{% static 'js/scripts.js' %}"></script>
 
 
-
-
     <script type="text/javascript" src="{% static 'js/iziToast.min.js' %}"></script>
 
+<script>
 
+    $(document).ready(function() {
+    $('.searchable').select2();
+});
+</script>
 
  {% if messages %}
         {% for message in messages %}
