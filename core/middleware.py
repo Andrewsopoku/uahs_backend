@@ -21,8 +21,7 @@ class CoreMiddleware(object):
                 request.reg = reg
                 request.company = company
 
-                print(reg)
-                print(company)
+
 
         response = self.get_response(request)
 

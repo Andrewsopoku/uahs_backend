@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from core.forms.ambulance_form import NewAmbulanceForm
 from core.models.ambulance import Ambulance
@@ -37,3 +37,11 @@ def list_ambulance(request,pk):
     ambulance_list = Ambulance.objects.filter(ambulance_service=ambulance_service)
     context = {"ambulance_list":ambulance_list}
     return render(request, 'ambulance_list.html',context)
+
+def change_ambulance_status(request,ambulance_pk,new_status):
+    ambulance = Ambulance.objects.get(id = ambulance_pk)
+    if ambulance:
+        ambulance.status = new_status
+        ambulance.save()
+
+    return redirect(request.META['HTTP_REFERER'])

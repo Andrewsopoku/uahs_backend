@@ -42,14 +42,14 @@
                                                         </button>
                                                         <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(72px, 43px, 0px); top: 0px; left: 0px; will-change: transform;">
                                                         {% if i.status == "Active" %}
-                                                            <a class="dropdown-item" href="{% url 'core:add-ambulance-driver' pk=i.id %}">Pend </a>
-                                                            <a class="dropdown-item" href="{% url 'core:add-ambulance-driver' pk=i.id %}">Remove </a>
+                                                            <a class="dropdown-item" href="{% url 'core:change-ambulance-status' ambulance_pk=i.id new_status="Pending" %}">Pend </a>
+                                                            <a class="dropdown-item" href="{% url  'core:change-ambulance-status' ambulance_pk=i.id new_status="Removed"%}">Remove </a>
                                                              {% if i.driver_assigned == False %}
                                                             <a class="dropdown-item" href="{% url 'core:add-ambulance-driver' pk=i.id %}">Assign Driver </a>
                                                            {% endif %}
                                                         {% endif %}
-                                                        {% if i.status == "Pendung" %}
-                                                            <a class="dropdown-item" href="{% url 'core:add-ambulance-driver' pk=i.id %}">Activate </a>
+                                                        {% if i.status == "Pending" %}
+                                                            <a class="dropdown-item" href="{% url 'core:change-ambulance-status' ambulance_pk=i.id new_status="Active" %}">Activate </a>
                                                            {% endif %}
 
                                                             <div class="dropdown-divider"></div>

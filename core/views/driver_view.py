@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from core.forms.ambulance_form import NewAmbulanceForm
 from core.forms.ambulance_service_form import AssignDriverAmbulance
@@ -41,3 +41,10 @@ def assign_driver_to_ambulance(request,pk):
     context = {'assigndriverambulance':assigndriverambulance,'assignments':assignments}
     return render(request,'driver_to_ambulance_assignment.html',context)
 
+def change_driver_status(request,driver_pk,new_status):
+    driver = AmbulanceDriver.objects.get(id = driver_pk)
+    if driver:
+        driver.status = new_status
+        driver.save()
+
+    return redirect(request.META['HTTP_REFERER'])

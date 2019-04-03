@@ -18,8 +18,10 @@ urlpatterns = [
     url('ambulance-service-admin/(?P<pk>\d+)/add', user_views.add_ambulance_service_admin, name="add-ambulance-service-admin"),
     url('ambulance-service-driver/(?P<pk>\d+)/add', user_views.add_ambulance_driver, name="add-ambulance-driver"),
     url('ambulance-service-driver/(?P<pk>\d+)/view', driver_view.list_driver, name="view-ambulance-driver"),
+    url('ambulance-service-driver/(?P<driver_pk>\d+)/(?P<new_status>[-\w]+)/change', driver_view.change_driver_status, name="change-driver-status"),
 
     url('ambulance/(?P<pk>\d+)/add', ambulance_views.add_ambulance, name="add-ambulance"),
+    url('ambulance/(?P<ambulance_pk>\d+)/(?P<new_status>[-\w]+)/change', ambulance_views.change_ambulance_status, name="change-ambulance-status"),
     url('ambulance/(?P<pk>\d+)/list', ambulance_views.list_ambulance, name="ambulance-list"),
     url('ambulance-service/(?P<pk>\d+)/add', ambulance_views.add_ambulance, name="add-ambulance"),
     url('ambulance-service/(?P<pk>\d+)/driver/assign', driver_view.assign_driver_to_ambulance, name="assign-driver-ambulance"),
