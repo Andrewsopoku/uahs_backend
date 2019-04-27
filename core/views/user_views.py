@@ -9,12 +9,15 @@ from django.contrib.auth.models import User, Group
 from django.shortcuts import render
 
 from core.core_util import add_zeros
-from core.forms.user_form import NewAmbulanceServiceForm, NewAmbulanceServiceAdminForm, NewAmbulanceDriverForm
+from core.forms.user_form import NewAmbulanceServiceForm, NewAmbulanceServiceAdminForm, NewAmbulanceDriverForm, \
+    NewHealthServiceAdminForm
 from core.models.ambulance_driver import AmbulanceDriver
 from core.models.ambulance_service import AmbulanceService
 from core.models.ambulance_service_admin import AmbulanceServiceAdmin
 from core.models.auth_user_demographic import AuthUserDemographic
 from core.models.contact_person import ContactPerson
+from core.models.health_service import HealthService
+from core.models.health_service_admin import HealthServiceAdmin
 from core.models.physical_address import PhysicalAddress
 
 
@@ -29,6 +32,7 @@ def sendsms(request,contact,pin):
     print(response)
     print(response.reason)
     print(response.content)
+
 def add_new_ambulance_service(request):
 
         if request.method == "POST":
@@ -123,7 +127,7 @@ def add_ambulance_service_admin(request,pk):
                                                             now.year, add_zeros(5, str(user_info.id)))
 
                 user_info.save()
-                ambulance_service = AmbulanceService.objects.get(id=1)
+                ambulance_service = AmbulanceService.objects.get(id=pk)
                 absa = AmbulanceServiceAdmin(user=user_info, ambulance_service=ambulance_service)
                 absa.save()
                 sendsms(request, mobile, pin)
@@ -181,7 +185,7 @@ def add_ambulance_driver(request,pk):
                                                             now.year, add_zeros(5, str(user_info.id)))
 
                 user_info.save()
-                ambulance_service = AmbulanceService.objects.get(id=1)
+                ambulance_service = AmbulanceService.objects.get(id=pk)
 
                 absa = AmbulanceDriver(user=user_info,driver_license_number=driver_license_number,
                                        ambulance_service= ambulance_service)
@@ -198,4 +202,64 @@ def add_ambulance_driver(request,pk):
 
     context = {'new_ambulance_driver_form': new_ambulance_driver_form }
     return render(request, 'add_ambulance_driver.html', context)
+
+
+def add_health_service_admin(request, pk):
+    if request.method == "POST":
+        new_health_service_admin_form = NewHealthServiceAdminForm(request.POST)
+        if new_health_service_admin_form.is_valid():
+            firstname = new_health_service_admin_form.cleaned_data['first_name']
+            nationality = new_health_service_admin_form.cleaned_data['nationality']
+            surname = new_health_service_admin_form.cleaned_data['surname']
+
+            mobile = new_health_service_admin_form.cleaned_data['mobile']
+            email = new_health_service_admin_form.cleaned_data['email']
+            address = new_health_service_admin_form.cleaned_data['address']
+            dob = new_health_service_admin_form.cleaned_data['date_of_birth']
+            sex = new_health_service_admin_form.cleaned_data['sex']
+
+            pin = random.randint(1000, 9999)
+            unique_id = "1"
+
+            now = datetime.datetime.now()
+
+            try:
+                user = User.objects.create_user(username=email, password=pin, )
+                user.groups.add(Group.objects.get_or_create(name="Health Service Admin")[0])
+                user.save()
+            except Exception as ab:
+                messages.error(request, ab)
+
+            else:
+
+                user_info = AuthUserDemographic(user=user, email=email,
+                                                first_name=firstname,
+                                                surname=surname, sex=sex, date_of_birth=dob,
+                                                nationality=nationality,
+                                                address=address,
+                                                mobile=mobile)
+
+                user_info.save()
+
+                user_info.unique_id = '{}{}{}{}'.format(now.day, now.month,
+                                                        now.year, add_zeros(5, str(user_info.id)))
+
+                user_info.save()
+                health_service = HealthService.objects.get(id=pk)
+                hsa = HealthServiceAdmin(user=user_info, health_service=health_service)
+                hsa.save()
+                sendsms(request, mobile, pin)
+
+
+                messages.success(request, "Health Service Admin Added Successfully")
+
+        else:
+            context = {'new_health_service_admin_form ': new_health_service_admin_form}
+            return render(request, 'add_health_service.html', context)
+
+    new_health_service_admin_form = NewHealthServiceAdminForm()
+
+    context = {'new_health_service_admin_form': new_health_service_admin_form}
+
+    return render(request, 'add_health_service_admin.html', context)
 

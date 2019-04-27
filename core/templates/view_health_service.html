@@ -1,10 +1,73 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'dashboardbase.html' %}
+
+        {% block title %}Dashboard{% endblock %}
+
+        {% block content %}
+            {% load static %}
+                <div class="row" style="margin-top: 20px">
+
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <h4 class="header-title">Health Services</h4>
+                                <div class="data-tables">
+                                    <table id="dataTable" class="text-center">
+                                        <thead class="bg-light text-capitalize">
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Country</th>
+                                                <th>Region</th>
+                                                <th>Town</th>
+
+                                                <th>Created At</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for i in health_services %}
+                                            <tr>
+                                                <td>{{ i.name }}</td>
+                                                <td>{{ i.physical_address.country }}</td>
+                                                <td>{{ i.physical_address.region }}</td>
+                                                <td>{{ i.physical_address.town }}</td>
+
+                                                <td>{{ i.created_at }}</td>
+                                                <td>
+
+                                                    <div class="btn-group">
+                                                        <button type="button" class="btn btn-rounded btn-danger">View</button>
+                                                        <button type="button" class="btn btn-rounded btn-danger dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                            <span class="sr-only">Toggle Dropdown</span>
+                                                        </button>
+                                                        <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(72px, 43px, 0px); top: 0px; left: 0px; will-change: transform;">
+                                                            {% if i.get_ambulance_service %}
+                                                            <a class="dropdown-item" href="{% url 'core:ambulance-service-detail' pk=i.get_ambulance_service.id %}">View Ambulance Service</a>
+
+                                                            {% else %}
+                                                            <a class="dropdown-item" href="{% url 'core:add-ambulance-service-to-health-service' pk=i.id %}">Add Ambulance Service</a>
+
+                                                            {% endif %}
+                                                        <div class="dropdown-divider"></div>
+                                                            <a class="dropdown-item" href="{% url 'core:add-health-service-admin' pk=i.id %}">Add Admin</a>
+
+
+                                                        </div>
+                                    </div>
+
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                       
+
+        {% endblock %}

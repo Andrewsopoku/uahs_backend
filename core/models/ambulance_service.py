@@ -14,3 +14,4 @@ class AmbulanceService(BaseModel):
     physical_address = models.ForeignKey(PhysicalAddress, on_delete=models.CASCADE)
     area_of_operation = models.CharField(max_length=255,null=True)
     contact_person = models.ForeignKey(ContactPerson, on_delete=models.CASCADE)
+    is_for_health_service = models.BooleanField(default=False)

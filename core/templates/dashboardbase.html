@@ -50,22 +50,22 @@
         <div class="sidebar-menu">
             <div class="sidebar-header">
                 <div class="logo">
-                    <a href=""><img src="{% static 'images/icon/uahs_logo.png' %}" alt="logo"></a>
+                    <a href=""><img src="{% static 'images/icon/logo_white.png' %}" alt="logo"></a>
                 </div>
             </div>
             <div class="main-menu">
                 <div class="menu-inner">
                     <nav>
                         <ul class="metismenu" id="menu">
-
-
-                    {% if request.user|has_group:"Ambulance Admin" %}
-                                <li class="active">
+                            <li class="active">
                                 <a href="{% url 'core:dashboard' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Dashboard</span></a>
 
                             </li>
 
-                        <li class="">
+                    {% if request.user|has_group:"Ambulance Admin" %}
+
+
+                            <li class="">
                                 <a href="{% url 'core:ambulance-service-detail' pk=request.company.id %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Company </span></a>
 
                             </li>
@@ -95,11 +95,52 @@
                         <a href="{% url 'core:dashboard' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Reports</span></a>
                         </li>
 
-                    {% else %}
-                            <li class="active">
-                                <a href="{% url 'core:dashboard' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>dashboard</span></a>
+                    {% elif request.user|has_group:"Health Service Admin" %}
+
+                          <li class="">
+                                <a href="{% url 'core:ambulance-service-detail' pk=request.company.id %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Company </span></a>
 
                             </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Ambulance
+
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="{% url 'core:add-ambulance' pk=request.company.id %}">Add</a></li>
+                                    <li><a href="{% url 'core:ambulance-list' pk=request.company.id %}">View </a></li>
+                                    <li><a href="{% url 'core:assign-driver-ambulance' pk=request.company.id %}">Assign Driver </a></li>
+                                </ul>
+                            </li>
+
+                           <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Driver
+
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="{% url 'core:add-ambulance-driver' pk=request.company.id %}">Add</a></li>
+                                    <li><a href="{% url 'core:view-ambulance-driver' pk=request.company.id %}">View </a></li>
+                                    <li><a href="{% url 'core:assign-driver-ambulance' pk=request.company.id %}">Assign Ambulance </a></li>
+
+                                </ul>
+                            </li>
+                        {% if request.company.health_service.get_ambulance_service %}
+                           <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Ambulance
+                                    Services
+                                    </span></a>
+                                <ul class="collapse">
+
+                                    <li><a href="{% url 'core:view-ambulance-service' %}">View </a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+
+                        <li>
+                        <a href="{% url 'core:dashboard' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Reports</span></a>
+                        </li>
+
+                    {% else %}
+
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Ambulance
                                     Services
@@ -112,13 +153,14 @@
                             <li>
                                 <a href="javascript:void(0)" aria-expanded="true"><i class="ti-pie-chart"></i><span>Health Services</span></a>
                                 <ul class="collapse">
-                                    <li><a href="">Add</a></li>
-                                    <li><a href="">View</a></li>
+                                    <li><a href="{% url 'core:add-health-service' %}">Add</a></li>
+                                    <li><a href="{% url 'core:view-health-service' %}">View</a></li>
 
                                 </ul>
                             </li>
 
                     {% endif %}
+
 
 
 

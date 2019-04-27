@@ -112,3 +112,39 @@ class NewAmbulanceDriverForm(forms.Form):
 
         self.fields['nationality'].choices = [("", "Select Country"), ] + choices
 
+
+
+class NewHealthServiceAdminForm(forms.Form):
+        # picture = forms.ImageField()
+        first_name = forms.CharField(max_length=255, widget=forms.TextInput(attrs={
+            'class': "form-control mb-4 input-rounded", 'placeholder': 'First Name'}), )
+
+        surname = forms.CharField(max_length=255,
+                                  widget=forms.TextInput(attrs={'class': "form-control mb-4 input-rounded",
+                                                                'placeholder': 'Surname'}), )
+        sex = forms.ChoiceField(choices=Sex, widget=forms.RadioSelect(attrs={'class': "", }),
+                                required=False)
+
+        date_of_birth = forms.DateField(widget=forms.DateInput(
+            attrs={'class': 'datepicker form-control mb-4 input-rounded', 'placeholder': 'Date of Birth',
+                   'type': "date"}),
+                                        input_formats=["%Y-%m-%d"])
+        nationality = forms.ChoiceField(required=False, widget=forms.Select(
+            attrs={'class': "form-control mb-4 input-rounded", 'placeholder': 'Nationality'}), )
+
+        address = forms.CharField(max_length=255, required=False,
+                                  widget=forms.TextInput(
+                                      attrs={'class': "form-control mb-4 input-rounded", 'placeholder': 'Address'}), )
+
+        email = forms.EmailField(max_length=255, widget=forms.TextInput(
+            attrs={'class': "form-control mb-4 input-rounded", 'placeholder': 'Email'}), )
+        mobile = forms.CharField(max_length=255, widget=forms.TextInput(
+            attrs={'class': "form-control mb-4 input-rounded", 'placeholder': 'Phone Number'}), )
+
+        def __init__(self, data=None, initial=None, instance=None):
+            super(NewHealthServiceAdminForm, self).__init__(data=data, initial=initial, )
+            countries = Country.objects.all()
+            choices = [(product.iso_numeric, product.name) for product in countries]
+
+            self.fields['nationality'].choices = [("", "Select Country"), ] + choices
+

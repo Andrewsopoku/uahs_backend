@@ -22,6 +22,7 @@ from uahs_backend import settings
 
 urlpatterns = [
     url(r'^',include('core.urls')),
+    url('uahs/api/',include('api.urls')),
     url('admin/', admin.site.urls),
 
    # path('api/uahs/', include('api.urls'))
