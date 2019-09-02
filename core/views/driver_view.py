@@ -27,7 +27,7 @@ def assign_driver_to_ambulance(request,pk):
             driver = assigndriverambulance.cleaned_data['driver']
             ambulance = assigndriverambulance.cleaned_data['ambulance']
             driver_assignment = AmbulanceDriver.objects.get(id=driver)
-            ambulance_assignment = Ambulance.objects.get(id=driver)
+            ambulance_assignment = Ambulance.objects.get(id=ambulance)
 
             assignment = AmbulanceDriverAssignment(driver=driver_assignment,
                                                    ambulance=ambulance_assignment,

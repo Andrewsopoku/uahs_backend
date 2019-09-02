@@ -1,0 +1,86 @@
+{% extends 'dashboardbase.html' %}
+
+        {% block title %}Dashboard{% endblock %}
+
+        {% block content %}
+            {% load static %}
+                <div class="row" style="margin-top: 20px">
+
+                <div class="col-md-6">
+
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="header-title"> Add City Rate </h4>
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <div class="row">
+
+                                <div class="col-md-6" style="margin-bottom: 15px">
+                                    <label>Select City</label>
+                                    {{ set_ambulanceservice_price.city }}
+                                </div>
+                                <div class="col-md-6"  style="margin-bottom: 15px">
+                                    <label>Select Unit</label>
+                                    {{ set_ambulanceservice_price.distance_unit }}
+                                </div>
+
+                                <div class="col-md-6">
+                        {{ set_ambulanceservice_price.minumum_distance }}
+                                </div>
+                                <div class="col-md-6">
+                        {{ set_ambulanceservice_price.minumum_rate }}
+                                </div>
+                                          <div class="col-md-6">
+                        {{ set_ambulanceservice_price.rate_per_minumum_distance }}
+                                </div>
+
+                                <div class="col-md-12">
+                                    <button type="submit" class="btn btn-rounded btn-danger">
+                                        Add  Price
+                                    </button>
+                                </div>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+                </div>
+                <div class="col-md-6">
+
+                    <div class="card">
+                            <div class="card-body">
+                            <h4 class="header-title">Cities Rate</h4>
+                            <div class="data-tables">
+                                <table id="dataTable" class="text-center" >
+                                    <thead class="bg-light text-capitalize">
+                                    <tr>
+                                        <th>City</th>
+                                        <th>Unit</th>
+                                        <th>Minimum Distance</th>
+                                        <th>Minimum Rate</th>
+                                        <th>Rate Per Distance</th>
+                                    </tr>
+
+                                    </thead>
+                                    <tbody>
+                                    {% for ambulance_rate in all_ambulance_rate %}
+                                        <tr>
+                                            <td>{{ ambulance_rate.city }}</td>
+                                            <td>{{ ambulance_rate.distance_unit }}</td>
+                                            <td>{{ ambulance_rate.minumum_distance }}</td>
+                                            <td>{{ ambulance_rate.minumum_rate }}</td>
+                                            <td>{{ ambulance_rate.rate_per_minumum_distance }}</td>
+                                        </tr>
+
+                                    {% endfor %}
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            </div>
+                    </div>
+
+                </div>
+                </div>
+        {% endblock %}

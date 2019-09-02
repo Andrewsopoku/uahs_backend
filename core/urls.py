@@ -2,7 +2,7 @@ from django.conf.urls import url
 
 from core.views import core_views, user_views, ambulance_views, home_views,\
     driver_view, health_service_view
-
+from core.views.settings_views import set_ambulance_price
 
 __author__ = 'andrews'
 
@@ -33,5 +33,10 @@ urlpatterns = [
     url('health-service-admin/(?P<pk>\d+)/add', user_views.add_health_service_admin,
         name="add-health-service-admin"),
     url('health-service/(?P<pk>\d+)/add-ambulance-service', health_service_view.add_ambulance_service_to_health_service,
-        name="add-ambulance-service-to-health-service")
+        name="add-ambulance-service-to-health-service"),
+
+
+
+    url('setting/set-ambulance-price', set_ambulance_price,
+        name="set-ambulance-price")
 ]

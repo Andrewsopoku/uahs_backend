@@ -5,7 +5,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.shortcuts import render
 
-from core.core_util import add_zeros
+from core.core_util import add_zeros, send_driver_request_notification
+from core.models.app_fcm_token import FCM_Token
 from core.models.auth_user_demographic import AuthUserDemographic
 
 # Create your views here.
@@ -23,7 +24,7 @@ from django.views.decorators.csrf import csrf_exempt
 @csrf_exempt
 def signin(request):
     if request.method == 'POST':
-        username = request.POST.get('username','')
+        username = request.POST.get('email','')
         password = request.POST.get('password','')
 
         if username and password:
@@ -32,18 +33,18 @@ def signin(request):
 
             if user is not None:
                     user_serial = AuthUserDemographic.objects.get(user= user)
-
-
-
-                    response = json.dumps({'status': 'ok', 'user_id': user_serial.id,
-                                           'first_time':user_serial.first_login, "name":"{} {}".format(user_serial.first_name,
-                                                                                                       user_serial.surname),
-                                           'p_id':user_serial.unique_id})
+                    response = json.dumps({'status': 'ok',
+                                           'user_id': user_serial.id,
+                                           'first_time':user_serial.first_login,
+                                           'name':'{} {}'.format(user_serial.first_name,user_serial.surname),
+                                           'p_id': user_serial.unique_id,
+                                           'group':str(user_serial.get_user_group()),
+                                           })
 
             else:
-                    response = json.dumps({'status': 'error', 'message': "Wrong username or password"})
+                    response = json.dumps({'status': 'error', 'message': "Wrong email or password"})
         else:
-            response = json.dumps({'status': 'error', 'message': "Username or password not provided"})
+            response = json.dumps({'status': 'error', 'message': "Email or password not provided"})
 
     else:
         response = json.dumps({'status': 'error', 'message': "something went wrong"})
@@ -51,10 +52,10 @@ def signin(request):
     return HttpResponse(response, content_type='application/json')
 
 @csrf_exempt
-def reset_pin(request):
+def reset_password(request):
     if request.method == 'POST':
         user_id = request.POST.get('user_id','')
-        password = request.POST.get('password','')
+        password = request.POST.get('newPassword','')
 
         if user_id and password:
             demoUser = AuthUserDemographic.objects.get(id=user_id)
@@ -88,12 +89,13 @@ def patient_register(request):
                 user.groups.add(Group.objects.get_or_create(name="Patient")[0])
                 user.save()
             except Exception as ab:
-                messages.error(request, ab)
+                response = json.dumps({'status': 'error', 'message': 'Account already exist'})
+
 
             else:
                 now = datetime.datetime.now()
                 user_info = AuthUserDemographic(user=user, email=email,
-                                                    nationality=Country.objects.get(phone=countrycode).name,
+                                                    nationality=Country.objects.get(iso=countrycode).name,
                                                     mobile=phone_number)
                 user_info.save()
                 user_info.unique_id = 'PA{}{}{}{}'.format(now.day, now.month,
@@ -103,8 +105,9 @@ def patient_register(request):
 
                 response = json.dumps({'status': 'ok','message':'Account has been created successfully'})
 
-        except:
-             response = json.dumps({'status': 'error', 'message': "Invalid data"})
+        except Exception as exs:
+            message = exs.args
+            response = json.dumps({'status': 'error', 'message': message})
 
     else:
         response = json.dumps({'status': 'error', 'message': "something went wrong"})
@@ -138,6 +141,31 @@ def profile(request):
                         response = json.dumps({'status': 'error', 'message': "Wrong username or password"})
             else:
                 response = json.dumps({'status': 'error', 'message': "Username or password not provided"})
+
+    except:
+            response = json.dumps({'status': 'error', 'message': "something went wrong"})
+
+    return HttpResponse(response, content_type='application/json')
+
+@csrf_exempt
+def add_token(request):
+    try:
+        if request.method == 'POST':
+
+            user_id = request.POST.get('user_id','')
+            token = request.POST.get('token','')
+            # import pdb
+            # pdb.set_trace()
+
+            if user_id and token:
+                    user_serial = AuthUserDemographic.objects.get(id=user_id)
+                    FCM_Token.set_user_token(auth_user=user_serial,token=token)
+                    #send_driver_request_notification(user_serial)
+
+                    response = json.dumps({'status': 'ok', 'message':"Token saved"})
+
+            else:
+                response = json.dumps({'status': 'error', 'message': "Wrong username or password"})
 
     except:
             response = json.dumps({'status': 'error', 'message': "something went wrong"})

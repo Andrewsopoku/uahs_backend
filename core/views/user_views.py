@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.shortcuts import render
 
-from core.core_util import add_zeros
+from core.core_util import add_zeros, randomPassword
 from core.forms.user_form import NewAmbulanceServiceForm, NewAmbulanceServiceAdminForm, NewAmbulanceDriverForm, \
     NewHealthServiceAdminForm
 from core.models.ambulance_driver import AmbulanceDriver
@@ -158,13 +158,13 @@ def add_ambulance_driver(request,pk):
             dob = new_ambulance_driver_form .cleaned_data['date_of_birth']
             sex = new_ambulance_driver_form .cleaned_data['sex']
             driver_license_number = new_ambulance_driver_form .cleaned_data['driver_license_number']
-            pin = random.randint(1000, 9999)
-            unique_id = "1"
+            password = randomPassword()
 
+            print(password)
             now = datetime.datetime.now()
 
             try:
-                user = User.objects.create_user(username=email, password=pin,)
+                user = User.objects.create_user(username=email, password=password,)
                 user.groups.add(Group.objects.get_or_create(name="Ambulance Driver")[0])
                 user.save()
             except Exception as ab:

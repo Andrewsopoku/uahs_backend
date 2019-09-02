@@ -1,4 +1,4 @@
-from core.models.base_model import BaseModel
+from core.models.base_model import BaseModel, get_object_or_none
 from django.contrib.auth.models import User, Group
 from django.db import models
 from datetime import date
@@ -17,7 +17,7 @@ class AuthUserDemographic(BaseModel):
     unique_id = models.CharField(max_length=255,null=True)
     surname = models.CharField(max_length=255,null=True,verbose_name="Surname")
     sex = models.CharField(max_length=255,choices=sex,verbose_name="Gender",default="Male")
-    date_of_birth = models.DateField(verbose_name="Date of Birth")
+    date_of_birth = models.DateField(verbose_name="Date of Birth",blank=True,null=True)
     nationality = models.CharField(max_length=255,null=True)
     religion = models.CharField(max_length=255,null=True)
     marital_status = models.CharField(max_length=255,choices=marital,default="Single")
@@ -48,9 +48,13 @@ class AuthUserDemographic(BaseModel):
     #     users_in_group = Group.objects.get(name="Nurse").user_set.all()
     #     return True if self.user in users_in_group else False
     #
-    # def is_generalsupervisor(self, ):
-    #     users_in_group = Group.objects.get(name="General Supervisor").user_set.all()
-    #     return True if self.user in users_in_group else False
+
+    def get_user_group(self):
+        return self.user.groups.all()[0] if self.user.groups.all() else ""
+
+    def is_ambulance_driver(self, ):
+        users_in_group = Group.objects.get(name="Ambulance Driver").user_set.all()
+        return True if self.user in users_in_group else False
 
 
     def get_age(self):
@@ -62,6 +66,10 @@ class AuthUserDemographic(BaseModel):
     @property
     def get_absolute_image_url(self):
         return "{0}{1}".format(settings.MEDIA_URL, self.picture.url)
+
+    @classmethod
+    def get_user_by_id(cls,user_id):
+        return get_object_or_none(cls,id=user_id)
 
 
 

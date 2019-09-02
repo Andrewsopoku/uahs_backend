@@ -20,3 +20,22 @@ class AssignDriverAmbulance(forms.Form, ):
 
     ambulance = forms.ChoiceField(widget=forms.Select(attrs={'class': "form-control mb-4 input-rounded searchable", 'searchable': "Search here.."}), )
     driver = forms.ChoiceField(widget=forms.Select(attrs={'class': "form-control mb-4 input-rounded searchable", 'searchable': "Search here.."}), )
+
+
+Cities = (("Accra", "Accra"), ("Kumasi", "Kumasi"),)
+Unit = (("Metre", "Metre"), ("Kilometre", "Kilometre"),)
+
+
+class SetAmbulanceServicePrice(forms.Form, ):
+
+    city = forms.ChoiceField(choices=Cities,widget=forms.Select(attrs={'class': "form-control mb-4 input-rounded searchable", 'searchable': "Search here.."}), )
+    distance_unit = forms.ChoiceField(choices=Unit,widget=forms.Select(attrs={'class': "form-control mb-4 input-rounded searchable", 'searchable': "Search here.."}), )
+
+    minumum_rate = forms.CharField(max_length=255, widget=forms.NumberInput(attrs={
+        'class': "form-control mb-4 input-rounded", 'placeholder': 'Minimum rate'}), )
+
+    minumum_distance = forms.CharField(max_length=255, widget=forms.NumberInput(attrs={
+        'class': "form-control mb-4 input-rounded", 'placeholder': 'Minimum distance'}), )
+
+    rate_per_minumum_distance = forms.CharField(max_length=255, widget=forms.NumberInput(attrs={
+        'class': "form-control mb-4 input-rounded", 'placeholder': 'Rate per distance'}), )
