@@ -1,4 +1,6 @@
+
 {% extends 'dashboardbase.html' %}
+{% load has_group %}
 
         {% block title %}Dashboard{% endblock %}
 
@@ -7,7 +9,48 @@
 
 
 
+                    {% if request.user|has_group:"Ambulance Admin" %}
+                        <div class="row" style="margin-top: 30px">
+
+
+
+                            <div class="col-md-4">
+                                <div class="single-report mb-xs-30"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                        <div class="icon"><i class="fa fa-drivers-license"></i></div>
+                                        <div class="s-report-title d-flex justify-content-between">
+                                            <h4 class="header-title mb-0">Drivers</h4>
+                                            <p>D</p>
+                                        </div>
+                                        <div class="d-flex justify-content-between pb-2">
+                                            <h2>0</h2>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                     </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="single-report mb-xs-30"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                        <div class="icon"><i class="fa fa-ambulance"></i></div>
+                                        <div class="s-report-title d-flex justify-content-between">
+                                            <h4 class="header-title mb-0">Ambulance</h4>
+                                            <p>AM</p>
+                                        </div>
+                                        <div class="d-flex justify-content-between pb-2">
+                                            <h2>0</h2>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                   </div>
+                            </div>
+
+                        </div>
+
+                    {% elif request.user|has_group:"Health Service Admin" %}
+
                     <div class="row" style="margin-top: 30px">
+
                         <div class="col-md-4">
                             <div class="single-report mb-xs-30"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                                 <div class="s-report-inner pr--20 pt--30 mb-3">
@@ -53,8 +96,7 @@
                                 </div>
                                </div>
                         </div>
-                    </div>
-                    <div class="row" style="margin-top: 30px">
+
                         <div class="col-md-4">
                             <div class="single-report mb-xs-30"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                                 <div class="s-report-inner pr--20 pt--30 mb-3">
@@ -101,6 +143,9 @@
                                    </div>
                         </div>
                     </div>
+
+                    {% endif %}
+
                     <div class="row" style="margin-top: 30px">
                             <div class="col-md-6 mt-5 mb-3">
                                 <div class="card">

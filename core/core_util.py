@@ -31,9 +31,11 @@ def randomPassword():
 
 driver_app_server_key = 'AAAAlKBS6NA:APA91bH0Ba2YREHymJZ9W3UuazCdazFA3UWK6kBrL_8N08oV1-ZpNVUVWlXcb581kp8GOQOLnNRqVnAgsdWIP3jjUsekrlLa2KXAemWArf6dbwDZracGGobpO2xFHzeKen3wIWH9xMHN'
 patient_app_server_key = 'AAAAWZOrdNw:APA91bFA620kxq-VNxk90qs6BKCkrCh1QAI6XRbhnuvpfwTr3ScjIQgo8GENrxdhJCOZYK7NWmO5hpKF_NvHoboPmXGkPz0mUiZrV3PQRJQQHBcgdE9QzvU1Y4yYKpT9mDrTuVvTVQXS'
+
 def send_driver_request_notification(user,trans):
     data={'transaction_id':trans.id,
-          "area": get_area(trans.init_from_lat,trans.init_from_long)}
+          "area": get_area(trans.init_from_lat,trans.init_from_long),
+          'title':'Request Notification'}
     path_to_fcm = "https://fcm.googleapis.com"
     reg_id = FCM_Token.get_user_token(user)  # quick and dirty way to get that ONE fcmId from table
     message_title = "Ambulance Request"
@@ -54,9 +56,10 @@ def send_patient_accept_notification(user,trans):
             "driver_lat": AmbulanceLocation.objects.get(ambulance=trans.ambulance).lat,
             "driver_long": AmbulanceLocation.objects.get(ambulance=trans.ambulance).long,
             "driver_name":trans.driver.first_name,
+            "driver_mobile":trans.driver.mobile,
             "ambulance_number":trans.ambulance.registration_number,
             }
-    print(data)
+
     path_to_fcm = "https://fcm.googleapis.com"
     reg_id = FCM_Token.get_user_token(user)  # quick and dirty way to get that ONE fcmId from table
     message_title = "Ambulance Coming"
@@ -70,6 +73,11 @@ def send_patient_accept_notification(user,trans):
 
 def send_patient_tripstart_notification(user,trans):
     data={'transaction_id':trans.id,
+          "title": "Trip Started",
+          "patient_to_lat": trans.init_to_lat,
+          "patient_to_long": trans.init_to_long,
+          "patient_from_lat":trans.final_from_lat,
+          "patient_from_long":trans.final_from_long
            }
     path_to_fcm = "https://fcm.googleapis.com"
     reg_id = FCM_Token.get_user_token(user)  # quick and dirty way to get that ONE fcmId from table
@@ -79,11 +87,13 @@ def send_patient_tripstart_notification(user,trans):
                                                                       message_title=message_title,
                                                                       message_body=message_body,
                                                                       data_message=data)
+    print(data,result)
     return HttpResponse(result)
 
 
 def send_patient_tripend_notification(user,trans):
     data={'transaction_id':trans.id,
+          "title": "Trip Ended",
           'charge':trans.final_charge
            }
     path_to_fcm = "https://fcm.googleapis.com"

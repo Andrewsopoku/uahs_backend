@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from api.views.ambulance import get_price
 from core.core_util import send_driver_request_notification, send_patient_accept_notification, get_area, calc_dist, \
-    send_patient_tripend_notification
+    send_patient_tripend_notification, send_patient_tripstart_notification
 from core.models.ambulance import Ambulance
 from core.models.ambulance_driver_assignment import AmbulanceDriverAssignment
 from core.models.ambulance_location import AmbulanceLocation
@@ -104,11 +104,12 @@ def start_trip(request):
             trans.status = "Patient Picked Up"
             trans.save()
 
-            send_driver_request_notification(trans.patient,trans)
+            send_patient_tripstart_notification(trans.patient,trans)
 
             response = json.dumps({'status': 'ok', 'init_to_lat':trans.init_to_lat,
                                    'init_to_long':trans.init_to_long,
                                    'area':get_area(trans.init_to_lat,trans.init_to_long)})
+
         except Exception as ex:
             response = json.dumps({'status': 'error', 'message': str(ex)})
 
