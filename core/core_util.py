@@ -79,6 +79,7 @@ def send_patient_tripstart_notification(user,trans):
           "patient_from_lat":trans.final_from_lat,
           "patient_from_long":trans.final_from_long
            }
+
     path_to_fcm = "https://fcm.googleapis.com"
     reg_id = FCM_Token.get_user_token(user)  # quick and dirty way to get that ONE fcmId from table
     message_title = "Trip started"
@@ -91,19 +92,31 @@ def send_patient_tripstart_notification(user,trans):
     return HttpResponse(result)
 
 
-def send_patient_tripend_notification(user,trans):
+def send_party_tripend_notification(user,trans):
+    from api.views.transactions import END_TRIP
+    truncated = True
+    if trans.status == END_TRIP:
+        truncated = False
+    else:
+        truncated = True
     data={'transaction_id':trans.id,
           "title": "Trip Ended",
-          'charge':trans.final_charge
+          'charge':trans.final_charge,
+          'truncated':truncated
            }
+    api_key = patient_app_server_key
+    if user.is_ambulance_driver():
+        api_key = driver_app_server_key
+
     path_to_fcm = "https://fcm.googleapis.com"
     reg_id = FCM_Token.get_user_token(user)  # quick and dirty way to get that ONE fcmId from table
-    message_title = "Trip ended"
+    message_title = "Trip Ended"
     message_body = "Trip to {} has ended!".format(get_area(trans.init_to_lat,trans.init_to_long))
-    result = FCMNotification(api_key=patient_app_server_key).notify_single_device(registration_id=reg_id,
+    result = FCMNotification(api_key=api_key).notify_single_device(registration_id=reg_id,
                                                                       message_title=message_title,
                                                                       message_body=message_body,
                                                                       data_message=data)
+    print(result)
     return HttpResponse(result)
 
 from math import sin, cos, radians, degrees, acos

@@ -127,3 +127,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 STATIC_URL = '/static/'
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 10240

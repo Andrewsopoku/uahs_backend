@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from api.views.ambulance import get_price
 from core.core_util import send_driver_request_notification, send_patient_accept_notification, get_area, calc_dist, \
-    send_patient_tripend_notification, send_patient_tripstart_notification
+    send_patient_tripstart_notification, send_party_tripend_notification
 from core.models.ambulance import Ambulance
 from core.models.ambulance_driver_assignment import AmbulanceDriverAssignment
 from core.models.ambulance_location import AmbulanceLocation
@@ -14,6 +14,12 @@ from core.models.app_fcm_token import FCM_Token
 from core.models.auth_user_demographic import AuthUserDemographic
 from core.models.base_model import get_object_or_none
 from core.models.transaction import Transaction
+
+START_TRIP = "Patient Picked Up"
+END_TRIP ="Trip Ended"
+WAIT_FOR_DRIVER = "Waiting For Driver"
+DRIVER_ACCEPT_REQUEST = "Request Accepted"
+TRIP_TRUNCATED = "Trip Truncated"
 
 
 @csrf_exempt
@@ -126,32 +132,40 @@ def end_trip(request):
             final_to_long = request.POST['final_to_long']
             trans_id = request.POST['transaction_id']
             user_id = request.POST['user_id']
-            driver = AuthUserDemographic.get_user_by_id(user_id)
-
+            user = AuthUserDemographic.get_user_by_id(user_id)
 
 
             import pdb
             #pdb.set_trace()
 
             trans = Transaction.objects.get(id = trans_id)
+
+
+
             trans.final_to_lat = final_to_lat
             trans.final_to_long = final_to_long
-            trans.status = "Trip Ended"
-            trans.save()
-
-
-            distance = calc_dist(eval(trans.final_from_lat), eval(trans.final_from_long),
-                                 eval(trans.final_to_lat), eval(trans.final_to_long))
-            trans.final_distance = distance
-            cityrate = AmbulanceRate.objects.filter(city="Accra")
-            price = get_price(cityrate[0], str(distance))
-            trans.final_charge = str(price)
 
             trans.save()
 
-            send_patient_tripend_notification(trans.patient,trans)
+            if trans.status == START_TRIP:
+                trans.status = END_TRIP
+                distance = calc_dist(eval(str(trans.final_from_lat)), eval(str(trans.final_from_long)),
+                                               eval(str(trans.final_to_lat)), eval(str(trans.final_to_long)))
+                trans.final_distance = distance
+                cityrate = AmbulanceRate.objects.filter(city="Accra")
+                price = get_price(cityrate[0], str(distance))
+                trans.final_charge = str(price)
+                response = json.dumps({'status': 'ok','truncated': False, 'charge': str(price)})
+            else:
+                trans.status = TRIP_TRUNCATED
+                response = json.dumps({'status': 'ok', 'truncated': True})
+            trans.save()
 
-            response = json.dumps({'status': 'ok', 'charge':str(price)})
+            if user.is_ambulance_driver():
+                send_party_tripend_notification(trans.patient,trans)
+            else:
+                send_party_tripend_notification(trans.driver, trans)
+
         except Exception as ex:
             response = json.dumps({'status': 'error', 'message': str(ex)})
 
