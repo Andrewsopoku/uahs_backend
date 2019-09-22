@@ -8,6 +8,7 @@ from core.models.ambulance_service import AmbulanceService
 
 def dashboard(request):
 
+
     return render(request,'dashboard.html')
 
 def ambulance_service_detail(request,pk):

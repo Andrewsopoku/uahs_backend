@@ -134,6 +134,9 @@ geolocator = Nominatim(user_agent="UAHS_Backend",timeout=3)
 
 
 def get_area(lat_a,long_a):
-    location = geolocator.reverse("{}, {}".format(lat_a,long_a))
-    area = location.address.split(',')
-    return "{} {}, {}".format(area[0],area[1],area[2])
+    if lat_a and long_a:
+        location = geolocator.reverse("{}, {}".format(lat_a,long_a))
+        area = location.address.split(',')
+        return "{} {}, {}".format(area[0],area[1],area[2])
+    else:
+        return "Unknown Location"

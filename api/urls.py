@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from api.views import user_views, ambulance, ambulance_driver, transactions
+from api.views import user_views, ambulance, ambulance_driver, transactions, trip_views
 
 __author__ = 'andrews'
 
@@ -18,6 +18,8 @@ urlpatterns = [
     url(r'^ambulance/accept_request',transactions.accept_ambulance_request, ),
     url(r'^ambulance/start_trip',transactions.start_trip, ),
     url(r'^ambulance/end_trip',transactions.end_trip, ),
+    url(r'^user/get_trip',trip_views.get_trips, ),
+
 
 
 

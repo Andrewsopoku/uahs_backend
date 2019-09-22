@@ -41,6 +41,6 @@ def signin(request):
 
 def sign_out(request):
     logout(request)
-    return redirect('core:home')
+    return redirect('core:signin')
 
 

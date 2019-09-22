@@ -1,7 +1,7 @@
 from django.conf.urls import url
 
-from core.views import core_views, user_views, ambulance_views, home_views,\
-    driver_view, health_service_view
+from core.views import core_views, user_views, ambulance_views, home_views, \
+    driver_view, health_service_view, transaction_view
 from core.views.settings_views import set_ambulance_price
 
 __author__ = 'andrews'
@@ -16,6 +16,7 @@ urlpatterns = [
 
     url('ambulance-service/add', user_views.add_new_ambulance_service, name="add-ambulance-service"),
     url('ambulance-service/view', user_views.view_ambulance_services, name="view-ambulance-service"),
+    url('ambulance-service/trips-completed', transaction_view.ambulance_service_trips, name="ambulance-service-trips"),
 
     url('ambulance-service-admin/(?P<pk>\d+)/add', user_views.add_ambulance_service_admin, name="add-ambulance-service-admin"),
     url('ambulance-service-driver/(?P<pk>\d+)/add', user_views.add_ambulance_driver, name="add-ambulance-driver"),

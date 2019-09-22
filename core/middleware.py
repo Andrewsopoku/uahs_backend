@@ -20,7 +20,9 @@ class CoreMiddleware(object):
                 reg = AuthUserDemographic.objects.get(user=request.user)
                 company = AmbulanceServiceAdmin.objects.get(user=reg)
                 request.reg = reg
-                request.company = company
+                request.admin = company
+                request.company = company.ambulance_service
+
             elif request.user.groups.filter(name='Health Service Admin').exists() :
                 reg = AuthUserDemographic.objects.get(user=request.user)
                 company = HealthServiceAdmin.objects.get(user=reg)

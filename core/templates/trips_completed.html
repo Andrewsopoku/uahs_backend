@@ -1,0 +1,54 @@
+
+
+{% extends 'dashboardbase.html' %}
+
+        {% block title %}Dashboard{% endblock %}
+
+        {% block content %}
+            {% load static %}
+                <div class="row" style="margin-top: 20px">
+
+
+
+            <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-body">
+
+                                <h4 class="header-title">Trips Completed </h4>
+                                <div class="data-tables">
+                                    <table id="dataTable" class="text-center">
+                                        <thead class="bg-light text-capitalize">
+                                            <tr>
+                                                <th>Driver</th>
+                                                <th>Ambulance</th>
+
+                                                <th>Date</th>
+                                                <th> From</th>
+                                                <th>To</th>
+                                                <th>Charge</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for i in trips %}
+                                            <tr>
+                                                <td>{{ i.driver }} </td>
+                                                <td>{{ i.ambulance }}</td>
+                                                <td>{{ i.created_at }}</td>
+
+
+                                                <td>{{ i.get_from_address }}</td>
+                                                <td>{{ i.get_to_address }}</td>
+                                                <td>{{ i.final_charge }}</td>
+
+                                            </tr>
+                                        {% endfor %}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
