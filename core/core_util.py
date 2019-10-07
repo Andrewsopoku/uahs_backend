@@ -43,7 +43,8 @@ def send_driver_request_notification(user,trans):
     result = FCMNotification(api_key=driver_app_server_key).notify_single_device(registration_id=reg_id,
                                                                       message_title=message_title,
                                                                       message_body=message_body,
-                                                                      data_message=data)
+                                                                      data_message=data,
+                                                                                 sound="beyond_doubt_2.mp3")
     return HttpResponse(result)
 
 def send_patient_accept_notification(user,trans):
@@ -58,6 +59,7 @@ def send_patient_accept_notification(user,trans):
             "driver_name":trans.driver.first_name,
             "driver_mobile":trans.driver.mobile,
             "ambulance_number":trans.ambulance.registration_number,
+
             }
 
     path_to_fcm = "https://fcm.googleapis.com"
@@ -67,7 +69,8 @@ def send_patient_accept_notification(user,trans):
     result = FCMNotification(api_key=patient_app_server_key).notify_single_device(registration_id=reg_id,
                                                                       message_title=message_title,
                                                                       message_body=message_body,
-                                                                      data_message=data)
+                                                                      data_message=data,
+                                                                                  sound="beyond_doubt_2.mp3")
     print(result)
     return HttpResponse(result)
 
@@ -87,7 +90,8 @@ def send_patient_tripstart_notification(user,trans):
     result = FCMNotification(api_key=patient_app_server_key).notify_single_device(registration_id=reg_id,
                                                                       message_title=message_title,
                                                                       message_body=message_body,
-                                                                      data_message=data)
+                                                                      data_message=data,
+                                                                                  sound="beyond_doubt_2.mp3")
     print(data,result)
     return HttpResponse(result)
 
@@ -115,7 +119,10 @@ def send_party_tripend_notification(user,trans):
     result = FCMNotification(api_key=api_key).notify_single_device(registration_id=reg_id,
                                                                       message_title=message_title,
                                                                       message_body=message_body,
-                                                                      data_message=data)
+                                                                      data_message=data,
+                                                                      sound="beyond_doubt_2.mp3")
+
+
     print(result)
     return HttpResponse(result)
 

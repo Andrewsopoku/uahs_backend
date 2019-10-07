@@ -21,11 +21,14 @@ def get_trips(request):
     response = {}
     user_id = request.POST['user_id']
     response["transactions"] = []
+
     user = AuthUserDemographic.get_user_by_id(user_id=user_id)
+
     if user.is_ambulance_driver():
         trips = Transaction.objects.filter(driver=user,status=END_TRIP )
     else:
-        trips = Transaction.objects.filter(patient=user)
+        trips = Transaction.objects.filter(patient=user,status=END_TRIP)
+
 
     for transaction in list(trips):
         temp = {}

@@ -30,13 +30,12 @@ class AmbulanceLocation(BaseModel):
        locs = cls.objects.filter(status="Available")
        print(locs)
        ambulance_location = None
-       distance = 20000000000
+       distance = 2000000000000
        for loc in locs:
            point_distance = calc_dist(eval(lat_a), eval(long_a), eval(loc.lat), eval(loc.long))
            if point_distance < distance :
                ambulance_location = loc
                distance = point_distance
 
-       print(ambulance_location)
        return ambulance_location
 
