@@ -30,6 +30,8 @@ class AmbulanceLocation(BaseModel):
        locs = cls.objects.filter(status="Available")
        print(locs)
        ambulance_location = None
+       import pdb
+       pdb.set_trace()
        distance = 2000000000000
        for loc in locs:
            point_distance = calc_dist(eval(lat_a), eval(long_a), eval(loc.lat), eval(loc.long))
