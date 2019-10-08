@@ -46,8 +46,6 @@ def find_driver(request):
             closest_ambulance = AmbulanceLocation.get_closest_ambulance(lat_a=init_from_lat,long_a=init_from_long)
 
             if closest_ambulance:
-                import pdb
-                pdb.set_trace()
                 driver = AmbulanceDriverAssignment.get_ambulance_driver(closest_ambulance.ambulance).driver
                 send_driver_request_notification(driver.user,trans)
                 response = json.dumps({'status': 'ok', 'message': "Connecting to Ambulance","transaction_id":trans.id})
