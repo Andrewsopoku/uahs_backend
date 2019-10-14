@@ -12,6 +12,7 @@ from core.models.transaction import Transaction
 
 
 def ambulance_service_trips(request):
+
     trips = Transaction.get_trips_for_ambulance_service(request.company)
     context = {"trips":trips}
     return render(request, 'trips_completed.html',context)
