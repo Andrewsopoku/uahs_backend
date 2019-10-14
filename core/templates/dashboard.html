@@ -74,148 +74,121 @@
                         </div>
 
 
+
+
                     {% elif request.user|has_group:"Health Service Admin" %}
+                        <div class="row" style="margin-top: 30px">
+
+
+
+                            <div class="col-md-4">
+                                <div class="single-report mb-xs-30"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                        <div class="icon"><i class="fa fa-drivers-license-o"></i></div>
+                                        <div class="s-report-title d-flex justify-content-between">
+                                            <h4 class="header-title mb-0">Doctors</h4>
+                                            <p>D</p>
+                                        </div>
+                                        <div class="d-flex justify-content-between pb-2">
+                                            <h2>0</h2>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                     </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="single-report mb-xs-30"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                    <div class="s-report-inner pr--20 pt--30 mb-3">
+                                        <div class="icon"><i class="fa fa-ambulance"></i></div>
+                                        <div class="s-report-title d-flex justify-content-between">
+                                            <h4 class="header-title mb-0">Nurses</h4>
+                                            <p>AM</p>
+                                        </div>
+                                        <div class="d-flex justify-content-between pb-2">
+                                            <h2>0</h2>
+                                            <span></span>
+                                        </div>
+                                    </div>
+                                   </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row" style="margin-top: 30px">
+                            <div class="col-md-6 mt-5 mb-3">
+                                <div class="card">
+                                    <div class="seo-fact sbg1"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                        <div class="p-4 d-flex justify-content-between align-items-center">
+                                            <div class="seofct-icon"><i class="ti-car"></i> Health Professionals Orders</div>
+                                            <h2>{{ request.company.get_ambulance_orders_count }}</h2>
+                                        </div>
+                                        <canvas id="seolinechart1" height="120" width="720" class="chartjs-render-monitor" style="display: block; height: 60px; width: 360px;"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mt-5 mb-3">
+                                <div class="card">
+                                    <div class="seo-fact sbg3">
+                                        <div class="p-4 d-flex justify-content-between align-items-center"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                            <div class="seofct-icon">Impressions</div>
+                                            <canvas id="seolinechart3" height="120" width="400" class="chartjs-render-monitor" style="display: block; height: 60px; width: 200px;"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    {% else %}
+
 
                     <div class="row" style="margin-top: 30px">
-
-                        <div class="col-md-4">
-                            <div class="single-report mb-xs-30"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
-                                    <div class="icon"><i class="fa fa-building"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Ambulance Services</h4>
-                                        <p>AS</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>0</h2>
-                                        <span></span>
+                            <div class="col-md-6 mt-5 mb-3">
+                                <div class="card">
+                                    <div class="seo-fact sbg1"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                        <div class="p-4 d-flex justify-content-between align-items-center">
+                                            <div class="seofct-icon"><i class="ti-car"></i> Ambulance Orders</div>
+                                            <h2>0</h2>
+                                        </div>
+                                        <canvas id="seolinechart1" height="120" width="720" class="chartjs-render-monitor" style="display: block; height: 60px; width: 360px;"></canvas>
                                     </div>
                                 </div>
-                                 </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="single-report mb-xs-30"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
-                                    <div class="icon"><i class="fa fa-hospital-o"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Health Services</h4>
-                                        <p>HS</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>0</h2>
-                                        <span></span>
+                            </div>
+                            <div class="col-md-6 mt-md-5 mb-3">
+                                <div class="card">
+                                    <div class="seo-fact sbg2"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                        <div class="p-4 d-flex justify-content-between align-items-center">
+                                            <div class="seofct-icon"><i class="ti-heart"></i> Health Personel Order</div>
+                                            <h2>0</h2>
+                                        </div>
+                                        <canvas id="seolinechart2" height="120" width="720" class="chartjs-render-monitor" style="display: block; height: 60px; width: 360px;"></canvas>
                                     </div>
                                 </div>
-                               </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="single-report"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
-                                    <div class="icon"><i class="fa fa-user-plus"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Users</h4>
-                                        <p>U</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>0</h2>
-                                        <span></span>
+                            </div>
+                            <div class="col-md-6 mb-3 mb-lg-0">
+                                <div class="card">
+                                    <div class="seo-fact sbg3">
+                                        <div class="p-4 d-flex justify-content-between align-items-center"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                            <div class="seofct-icon">Impressions</div>
+                                            <canvas id="seolinechart3" height="120" width="400" class="chartjs-render-monitor" style="display: block; height: 60px; width: 200px;"></canvas>
+                                        </div>
                                     </div>
                                 </div>
-                               </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="single-report mb-xs-30"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
-                                    <div class="icon"><i class="fa fa-drivers-license"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Drivers</h4>
-                                        <p>D</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>0</h2>
-                                        <span></span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card">
+                                    <div class="seo-fact sbg4">
+                                        <div class="p-4 d-flex justify-content-between align-items-center"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                                            <div class="seofct-icon">New Users</div>
+                                            <canvas id="seolinechart4" height="120" width="400" class="chartjs-render-monitor" style="display: block; height: 60px; width: 200px;"></canvas>
+                                        </div>
                                     </div>
                                 </div>
-                                 </div>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="single-report mb-xs-30"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
-                                    <div class="icon"><i class="fa fa-ambulance"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Ambulance</h4>
-                                        <p>AM</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>0</h2>
-                                        <span></span>
-                                    </div>
-                                </div>
-                               </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="single-report"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                                <div class="s-report-inner pr--20 pt--30 mb-3">
-                                    <div class="icon"><i class="fa fa-heart"></i></div>
-                                    <div class="s-report-title d-flex justify-content-between">
-                                        <h4 class="header-title mb-0">Health Workers</h4>
-                                        <p>HW</p>
-                                    </div>
-                                    <div class="d-flex justify-content-between pb-2">
-                                        <h2>0</h2>
-                                        <span></span>
-                                    </div>
-                                </div>
-                                   </div>
-                        </div>
-                    </div>
-
-                    {% endif %}
-{##}
-{#                    <div class="row" style="margin-top: 30px">#}
-{#                            <div class="col-md-6 mt-5 mb-3">#}
-{#                                <div class="card">#}
-{#                                    <div class="seo-fact sbg1"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>#}
-{#                                        <div class="p-4 d-flex justify-content-between align-items-center">#}
-{#                                            <div class="seofct-icon"><i class="ti-car"></i> Ambulance Orders</div>#}
-{#                                            <h2>0</h2>#}
-{#                                        </div>#}
-{#                                        <canvas id="seolinechart1" height="120" width="720" class="chartjs-render-monitor" style="display: block; height: 60px; width: 360px;"></canvas>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-md-6 mt-md-5 mb-3">#}
-{#                                <div class="card">#}
-{#                                    <div class="seo-fact sbg2"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>#}
-{#                                        <div class="p-4 d-flex justify-content-between align-items-center">#}
-{#                                            <div class="seofct-icon"><i class="ti-heart"></i> Health Personel Order</div>#}
-{#                                            <h2>0</h2>#}
-{#                                        </div>#}
-{#                                        <canvas id="seolinechart2" height="120" width="720" class="chartjs-render-monitor" style="display: block; height: 60px; width: 360px;"></canvas>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-md-6 mb-3 mb-lg-0">#}
-{#                                <div class="card">#}
-{#                                    <div class="seo-fact sbg3">#}
-{#                                        <div class="p-4 d-flex justify-content-between align-items-center"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>#}
-{#                                            <div class="seofct-icon">Impressions</div>#}
-{#                                            <canvas id="seolinechart3" height="120" width="400" class="chartjs-render-monitor" style="display: block; height: 60px; width: 200px;"></canvas>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="col-md-6">#}
-{#                                <div class="card">#}
-{#                                    <div class="seo-fact sbg4">#}
-{#                                        <div class="p-4 d-flex justify-content-between align-items-center"><div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>#}
-{#                                            <div class="seofct-icon">New Users</div>#}
-{#                                            <canvas id="seolinechart4" height="120" width="400" class="chartjs-render-monitor" style="display: block; height: 60px; width: 200px;"></canvas>#}
-{#                                        </div>#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
+            {% endif %}
 
         {% endblock %}
