@@ -26,6 +26,7 @@ def randomPassword():
     passwordList = list(password)
     random.SystemRandom().shuffle(passwordList)
     password = ''.join(passwordList)
+    password = password.replace(" ","")
     return password
 
 
@@ -147,3 +148,15 @@ def get_area(lat_a,long_a):
         return "{} {}, {}".format(area[0],area[1],area[2])
     else:
         return "Unknown Location"
+
+url = "https://api.hubtel.com/v1/messages/send"
+import requests
+
+def send_pin_register(to_contact,pin):
+    message = "Thanks for registering for UAHS services. Download UAHS app at .Your password is "+str(pin)
+    querystring = {"From": "UAHS Mobile", "To": to_contact, "Content": message, "ClientID": "eferjnka",
+                   "ClientSecret": "gcpgrhcn"}
+
+    response = requests.request("GET", url, params=querystring)
+
+    print(response.text)

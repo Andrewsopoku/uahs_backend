@@ -110,8 +110,8 @@
 
                                     </span></a>
                                 <ul class="collapse">
-                                    <li><a href="{% url 'core:add-ambulance' pk=request.company.id %}">Add</a></li>
-                                    <li><a href="{% url 'core:ambulance-list' pk=request.company.id %}">View </a></li>
+                                    <li><a href="">Add</a></li>
+                                    <li><a href="">View </a></li>
 
                                 </ul>
                             </li>
@@ -124,11 +124,43 @@
                                     </span></a>
                                 <ul class="collapse">
 
-                                    <li><a href="{% url 'core:view-ambulance-service' %}">View </a></li>
-                                    <li><a href="{% url 'core:view-ambulance-service' %}">Ambulance </a></li>
-                                    <li><a href="{% url 'core:view-ambulance-service' %}">Drivers </a></li>
-                                    <li><a href="{% url 'core:view-ambulance-service' %}">Driver Ambulance Assignment </a></li>
-                                    <li><a href="{% url 'core:view-ambulance-service' %}">Trips Completed </a></li>
+
+
+
+
+                            <li class="">
+                                <a href="{% url 'core:ambulance-service-detail' pk=request.company.id %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Company </span></a>
+
+                            </li>
+                            <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Ambulance
+
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="{% url 'core:add-ambulance' pk=request.company.id %}">Add</a></li>
+                                    <li><a href="{% url 'core:ambulance-list' pk=request.company.id %}">View </a></li>
+                                    <li><a href="{% url 'core:assign-driver-ambulance' pk=request.company.id %}">Assign Driver </a></li>
+                                </ul>
+                            </li>
+
+                           <li>
+                                <a href="javascript:void(0)" aria-expanded="true"><i class="ti-layout-sidebar-left"></i><span>Driver
+
+                                    </span></a>
+                                <ul class="collapse">
+                                    <li><a href="{% url 'core:add-ambulance-driver' pk=request.company.id %}">Add</a></li>
+                                    <li><a href="{% url 'core:view-ambulance-driver' pk=request.company.id %}">View </a></li>
+                                    <li><a href="{% url 'core:assign-driver-ambulance' pk=request.company.id %}">Assign Ambulance </a></li>
+
+                                </ul>
+                            </li>
+                        <li>
+                        <a href="{% url 'core:dashboard' %}" aria-expanded="true"><i class="ti-dashboard"></i><span>Reports</span></a>
+                          <ul class="collapse">
+                                    <li><a href="{% url 'core:ambulance-service-trips'  %}">Trips Completed</a></li>
+
+                                </ul>
+                        </li>
                                 </ul>
                             </li>
                         {% endif %}

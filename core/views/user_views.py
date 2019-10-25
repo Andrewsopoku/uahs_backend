@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.shortcuts import render
 
-from core.core_util import add_zeros, randomPassword
+from core.core_util import add_zeros, randomPassword, send_pin_register
 from core.forms.user_form import NewAmbulanceServiceForm, NewAmbulanceServiceAdminForm, NewAmbulanceDriverForm, \
     NewHealthServiceAdminForm
 from core.models.ambulance_driver import AmbulanceDriver
@@ -100,13 +100,13 @@ def add_ambulance_service_admin(request,pk):
             dob = new_ambulance_service_admin_form .cleaned_data['date_of_birth']
             sex = new_ambulance_service_admin_form .cleaned_data['sex']
 
-            pin = random.randint(1000, 9999)
+            password = randomPassword()
             unique_id = "1"
 
             now = datetime.datetime.now()
 
             try:
-                user = User.objects.create_user(username=email, password=pin,)
+                user = User.objects.create_user(username=email, password=password,)
                 user.groups.add(Group.objects.get_or_create(name="Ambulance Admin")[0])
                 user.save()
             except Exception as ab:
@@ -125,13 +125,11 @@ def add_ambulance_service_admin(request,pk):
 
                 user_info.unique_id = '{}{}{}{}'.format(now.day, now.month,
                                                             now.year, add_zeros(5, str(user_info.id)))
-
                 user_info.save()
                 ambulance_service = AmbulanceService.objects.get(id=pk)
                 absa = AmbulanceServiceAdmin(user=user_info, ambulance_service=ambulance_service)
                 absa.save()
-                sendsms(request, mobile, pin)
-
+                send_pin_register(mobile, password)
                 messages.success(request, "Ambulance Service Admin Added Successfully")
 
         else:
@@ -160,7 +158,7 @@ def add_ambulance_driver(request,pk):
             driver_license_number = new_ambulance_driver_form .cleaned_data['driver_license_number']
             password = randomPassword()
 
-            print(password)
+
             now = datetime.datetime.now()
 
             try:
@@ -191,6 +189,7 @@ def add_ambulance_driver(request,pk):
                                        ambulance_service= ambulance_service)
                 absa.save()
                 #sendsms(request, mobile, pin)
+                send_pin_register(mobile,password)
 
                 messages.success(request, "Ambulance Driver Added Successfully")
 
@@ -218,13 +217,13 @@ def add_health_service_admin(request, pk):
             dob = new_health_service_admin_form.cleaned_data['date_of_birth']
             sex = new_health_service_admin_form.cleaned_data['sex']
 
-            pin = random.randint(1000, 9999)
+            password = randomPassword()
             unique_id = "1"
 
             now = datetime.datetime.now()
 
             try:
-                user = User.objects.create_user(username=email, password=pin, )
+                user = User.objects.create_user(username=email, password=password, )
                 user.groups.add(Group.objects.get_or_create(name="Health Service Admin")[0])
                 user.save()
             except Exception as ab:
@@ -248,7 +247,7 @@ def add_health_service_admin(request, pk):
                 health_service = HealthService.objects.get(id=pk)
                 hsa = HealthServiceAdmin(user=user_info, health_service=health_service)
                 hsa.save()
-                sendsms(request, mobile, pin)
+                send_pin_register(mobile,password)
 
 
                 messages.success(request, "Health Service Admin Added Successfully")
