@@ -1,11 +1,12 @@
 import datetime
+from random import random
 
 from countries_plus.models import Country
 from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.shortcuts import render
 
-from core.core_util import add_zeros, send_driver_request_notification
+from core.core_util import add_zeros, send_driver_request_notification, send_pin_register_patient
 from core.models.app_fcm_token import FCM_Token
 from core.models.auth_user_demographic import AuthUserDemographic
 
@@ -102,6 +103,8 @@ def patient_register(request):
                                                             now.year, add_zeros(5, str(user_info.id)))
 
                 user_info.save()
+                pin = random.randint(1000, 9999)
+                send_pin_register_patient(phone_number,pin)
 
                 response = json.dumps({'status': 'ok','message':'Account has been created successfully'})
 

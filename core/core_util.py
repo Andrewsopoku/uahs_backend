@@ -160,3 +160,13 @@ def send_pin_register(to_contact,pin):
     response = requests.request("GET", url, params=querystring)
 
     print(response.text)
+
+def send_pin_register_patient(to_contact,pin):
+    message = "Thanks for registering for UAHS services. Your pin is "+str(pin)
+    querystring = {"From": "UAHS Mobile", "To": to_contact, "Content": message, "ClientID": "eferjnka",
+                   "ClientSecret": "gcpgrhcn"}
+
+    response = requests.request("GET", url, params=querystring)
+
+    print(response.text)
+
