@@ -3,6 +3,7 @@ from core.models.base_model import BaseModel, get_object_or_none
 from django.db import models
 
 from core.models.health_service import HealthService
+amb_type = (("Standard","Standard"),("Deluxe","Deluxe"))
 
 class Ambulance(BaseModel):
 
@@ -18,6 +19,8 @@ class Ambulance(BaseModel):
     driver_assigned = models.BooleanField(default=False)
     last_known_lat = models.CharField(max_length=255, null=True, )
     last_known_long = models.CharField(max_length=255, null=True, )
+    ambulance_type = models.CharField(max_length=255, null=True,choices=amb_type )
+
     #health_service = models.ForeignKey(HealthService,on_delete=models.CASCADE, blank=True, null=True)
 
     @classmethod

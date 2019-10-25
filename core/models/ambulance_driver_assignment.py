@@ -6,7 +6,7 @@ from django.db import models
 
 
 class AmbulanceDriverAssignment(BaseModel):
-    ambulance = models.ForeignKey(Ambulance, on_delete=models.CASCADE, null=True)
+    ambulance = models.ForeignKey(Ambulance, on_delete=models.CASCADE, null=True,)
     driver = models.ForeignKey(AmbulanceDriver, on_delete=models.CASCADE, null=True)
     ambulance_service = models.ForeignKey(AmbulanceService,on_delete=models.CASCADE, null=True)
     status = models.CharField(max_length=255, null=True, default= "Active")
@@ -14,4 +14,4 @@ class AmbulanceDriverAssignment(BaseModel):
 
     @classmethod
     def get_ambulance_driver(cls,ambulance):
-        return get_object_or_none(cls,ambulance=ambulance,status="Active")
+        return cls.objects.filter(ambulance = ambulance)[0]
