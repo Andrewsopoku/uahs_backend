@@ -14,11 +14,12 @@ def add_ambulance(request,pk):
             dominant_color = new_ambulance_form .cleaned_data['dominant_color']
             car_model = new_ambulance_form .cleaned_data['car_model']
             make_year = new_ambulance_form .cleaned_data['make_year']
+            type = new_ambulance_form.cleaned_data['type']
 
             ambulance_service = AmbulanceService.objects.get(id=pk)
             ambulance = Ambulance(registration_number=registration_number,dominant_color=dominant_color,
                                   car_model=car_model,make_year=make_year,ambulance_service=ambulance_service,
-                                  is_for_ambulance_service=True)
+                                  is_for_ambulance_service=True, type=type)
             ambulance.save()
 
             messages.success(request, "Ambulance  Added Successfully")
