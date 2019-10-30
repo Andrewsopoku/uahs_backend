@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.shortcuts import render
 
-from core.core_util import add_zeros, randomPassword, send_pin_register
+from core.core_util import add_zeros, randomPassword, send_pin_register, _sending_enterprise_acc_creation_password
 from core.forms.user_form import NewAmbulanceServiceForm, NewAmbulanceServiceAdminForm, NewAmbulanceDriverForm, \
     NewHealthServiceAdminForm
 from core.models.ambulance_driver import AmbulanceDriver
@@ -130,6 +130,8 @@ def add_ambulance_service_admin(request,pk):
                 absa = AmbulanceServiceAdmin(user=user_info, ambulance_service=ambulance_service)
                 absa.save()
                 send_pin_register(mobile, password)
+                _sending_enterprise_acc_creation_password(user_info, password)
+
                 messages.success(request, "Ambulance Service Admin Added Successfully")
 
         else:
@@ -190,6 +192,7 @@ def add_ambulance_driver(request,pk):
                 absa.save()
                 #sendsms(request, mobile, pin)
                 send_pin_register(mobile,password)
+                _sending_enterprise_acc_creation_password(user_info, password)
 
                 messages.success(request, "Ambulance Driver Added Successfully")
 
@@ -248,6 +251,7 @@ def add_health_service_admin(request, pk):
                 hsa = HealthServiceAdmin(user=user_info, health_service=health_service)
                 hsa.save()
                 send_pin_register(mobile,password)
+                _sending_enterprise_acc_creation_password(user_info,password)
 
 
                 messages.success(request, "Health Service Admin Added Successfully")

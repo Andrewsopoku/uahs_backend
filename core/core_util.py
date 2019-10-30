@@ -2,12 +2,15 @@ import random
 import string
 
 from django.http import HttpResponse
+from django.template.loader import get_template
 from pyfcm import FCMNotification
 
-
+from core.mailer import Mailer
 from core.models.app_fcm_token import FCM_Token
 
 __author__ = 'andrews'
+
+sender = "account@uahsghana.com"
 
 def add_zeros(length,code):
     while(len(code)<length):
@@ -169,4 +172,16 @@ def send_pin_register_patient(to_contact,pin):
     response = requests.request("GET", url, params=querystring)
 
     print(response.text)
+
+
+def _sending_enterprise_acc_creation_password(auth_user, password):
+    #registration = get_object_or_none(CompanyRegistration, pk=registration_id)
+        htmly = get_template('emails/enterprise_account_creation_email.html')
+        d = {'firstname': auth_user.firstname, 'password': password,}
+        message = htmly.render(d)
+
+
+        Mail = Mailer()
+        Mail.send_message(to=auth_user.email, sender=sender, subject="UMobile Registration", message=message)
+
 
