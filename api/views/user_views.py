@@ -34,13 +34,27 @@ def signin(request):
 
             if user is not None:
                     user_serial = AuthUserDemographic.objects.get(user= user)
-                    response = json.dumps({'status': 'ok',
-                                           'user_id': user_serial.id,
-                                           'first_time':user_serial.first_login,
-                                           'name':'{} {}'.format(user_serial.first_name,user_serial.surname),
-                                           'p_id': user_serial.unique_id,
-                                           'group':str(user_serial.get_user_group()),
-                                           })
+
+                    if user_serial.first_login:
+                        pin = random.randint(1000, 9999)
+                        send_pin_register_patient(user_serial.mobile,pin)
+                        response = json.dumps({'status': 'ok',
+                                               'user_id': user_serial.id,
+                                               'first_time':user_serial.first_login,
+                                               'name':'{} {}'.format(user_serial.first_name,user_serial.surname),
+                                               'p_id': user_serial.unique_id,
+                                               'group':str(user_serial.get_user_group()),
+                                               'pin':pin,
+                                               })
+                    else:
+                        response = json.dumps({'status': 'ok',
+                                               'user_id': user_serial.id,
+                                               'first_time':user_serial.first_login,
+                                               'name':'{} {}'.format(user_serial.first_name,user_serial.surname),
+                                               'p_id': user_serial.unique_id,
+                                               'group':str(user_serial.get_user_group()),
+                                               })
+
 
             else:
                     response = json.dumps({'status': 'error', 'message': "Wrong email or password"})
@@ -76,6 +90,30 @@ def reset_password(request):
 
     return HttpResponse(response, content_type='application/json')
 
+
+@csrf_exempt
+def activate_by_pin(request):
+    if request.method == 'POST':
+        user_id = request.POST.get('user_id','')
+
+        if user_id :
+            demoUser = AuthUserDemographic.objects.get(id=user_id)
+            demoUser.first_login = False
+            demoUser.save()
+
+            response = json.dumps({'status': 'ok', })
+
+        else:
+            response = json.dumps({'status': 'error', 'message': "Invalid data"})
+
+    else:
+        response = json.dumps({'status': 'error', 'message': "something went wrong"})
+
+    return HttpResponse(response, content_type='application/json')
+
+
+
+
 @csrf_exempt
 def patient_register(request):
     if request.method == 'POST':
@@ -103,8 +141,7 @@ def patient_register(request):
                                                             now.year, add_zeros(5, str(user_info.id)))
 
                 user_info.save()
-                pin = random.randint(1000, 9999)
-                send_pin_register_patient(phone_number,pin)
+
 
                 response = json.dumps({'status': 'ok','message':'Account has been created successfully'})
 

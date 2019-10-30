@@ -8,10 +8,10 @@ from email.mime.text import MIMEText
 class Mailer(object):
     def __init__(self):
 
-        self.api_key = 'key-71308276fd92f3dc2c0e984748126593'
-        self.domain = 'sandbox0c10cb96cc7b47b28614888ea25d8a5f.mailgun.org'
+        self.api_key = '31d5781962def2f029be573e0a9cb6b7-2dfb0afe-e70719ee'
+        self.domain = 'uahsghana.com'
 
-        self.url = 'https://api.mailgun.net/v3/{}/messages'.format(self.domain)
+        self.url = "https://api.mailgun.net/v3/mg.uahsghana.com/messages"
 
     def send_message(self, subject, message, to, sender):
          #self.domain = 'www.taxstamps.com'
