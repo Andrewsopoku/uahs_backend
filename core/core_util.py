@@ -177,7 +177,7 @@ def send_pin_register_patient(to_contact,pin):
 def _sending_enterprise_acc_creation_password(auth_user, password):
     #registration = get_object_or_none(CompanyRegistration, pk=registration_id)
         htmly = get_template('emails/enterprise_account_creation_email.html')
-        d = {'firstname': auth_user.firstname, 'password': password,}
+        d = {'firstname': auth_user.first_name, 'password': password,}
         message = htmly.render(d)
 
 
