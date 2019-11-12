@@ -11,5 +11,6 @@ class AmbulanceRate(BaseModel):
     minumum_distance = models.CharField(max_length=255, null=True)
     rate_per_minumum_distance = models.CharField(max_length= 255,null=True)
     distance_unit = models.CharField(max_length=255, null=True,default="Metre")
+    deluxe_rate = models.CharField(max_length=255, null=True,default="1")
     status = models.CharField(max_length=255, null=True, default= "Active")
 

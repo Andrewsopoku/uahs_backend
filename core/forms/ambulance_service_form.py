@@ -39,3 +39,6 @@ class SetAmbulanceServicePrice(forms.Form, ):
 
     rate_per_minumum_distance = forms.CharField(max_length=255, widget=forms.NumberInput(attrs={
         'class': "form-control mb-4 input-rounded", 'placeholder': 'Rate per distance'}), )
+
+    deluxe_rate = forms.CharField(max_length=255, widget=forms.NumberInput(attrs={
+        'class': "form-control mb-4 input-rounded", 'placeholder': 'Delux Rate'}), )
