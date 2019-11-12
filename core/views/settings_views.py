@@ -16,6 +16,7 @@ def set_ambulance_price(request,):
             minumum_distance = set_ambulanceservice_price.cleaned_data['minumum_distance']
             rate_per_minumum_distance = set_ambulanceservice_price.cleaned_data['rate_per_minumum_distance']
             distance_unit = set_ambulanceservice_price.cleaned_data['distance_unit']
+            deluxe_rate = set_ambulanceservice_price.cleaned_data['deluxe_rate']
 
             if AmbulanceRate.objects.filter(city=city):
                 messages.success(request, "City rate already set")
@@ -24,7 +25,8 @@ def set_ambulance_price(request,):
                 ambulance_rate = AmbulanceRate(city=city,minumum_rate=minumum_rate,
                                                minumum_distance=minumum_distance,
                                                rate_per_minumum_distance=rate_per_minumum_distance,
-                                               distance_unit=distance_unit)
+                                               distance_unit=distance_unit,
+                                               deluxe_rate=deluxe_rate)
 
                 ambulance_rate.save()
 
