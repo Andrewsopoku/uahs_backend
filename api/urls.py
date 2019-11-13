@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^ambulance/start_trip',transactions.start_trip, ),
     url(r'^ambulance/end_trip',transactions.end_trip, ),
     url(r'^user/get_trip',trip_views.get_trips, ),
+    url(r'^ambulance/ambulance-current-location',ambulance.get_ambulance_current_location, ),
 
 
 
