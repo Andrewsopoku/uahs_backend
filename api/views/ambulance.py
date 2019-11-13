@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from core.models.ambulance import Ambulance
 from core.models.ambulance_location import AmbulanceLocation
 from core.models.ambulance_rate import AmbulanceRate
+from core.models.base_model import get_object_or_none
 
 
 @csrf_exempt
@@ -40,6 +41,32 @@ def get_price(cityrate, distance, type="standard"):
     if type == "deluxe":
         price = price * eval(cityrate.deluxe_rate)
     return round(price,2)
+
+
+
+@csrf_exempt
+def get_ambulance_current_location(request):
+    response = json.dumps({'status': 'error', 'message': ""})
+    if request.method == "POST":
+        try:
+            reg_num = request.POST['reg_num']
+            ambulance = get_object_or_none(Ambulance,registration_number = reg_num)
+            if ambulance:
+
+                amb_loc = get_object_or_none(AmbulanceLocation,ambulance = ambulance)
+                if amb_loc:
+                    response = json.dumps({'status': 'ok', 'lat':str(amb_loc.lat),
+                                       'long': str(amb_loc.long)})
+
+
+        except Exception as ex:
+            response = json.dumps({'status': 'error', 'message':str(ex)})
+
+    else:
+        response = json.dumps({'status': 'error', 'message': "Method not allowed"})
+    return HttpResponse(response, content_type='application/json')
+
+
 
 @csrf_exempt
 def get_num_ambulance_available(request):
