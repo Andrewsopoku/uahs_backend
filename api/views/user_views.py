@@ -38,7 +38,9 @@ def signin(request):
             if user is not None:
                     user_serial = AuthUserDemographic.objects.get(user= user)
 
-                    if user_serial.first_login:
+                    user_typer = False if user_serial.is_ambulance_driver() else True
+
+                    if  user_typer and user_serial.first_login:
                         pin = random.randint(1000, 9999)
                         send_pin_register_patient(user_serial.mobile,pin)
                         response = json.dumps({'status': 'ok',

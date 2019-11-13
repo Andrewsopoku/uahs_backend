@@ -32,17 +32,13 @@ def find_driver(request):
             init_to_long = request.POST['to_long']
             user_id = request.POST['user_id']
             patient = AuthUserDemographic.get_user_by_id(user_id)
-
             distance = request.POST['distance']
-            import pdb
-            #pdb.set_trace()
 
             trans = Transaction(init_from_lat=init_from_lat,init_to_lat=init_to_lat,
                                 init_from_long=init_from_long,init_to_long=init_to_long,
                                 init_distance=distance,status="Waiting For Driver",
                                 patient=patient)
             trans.save()
-
             closest_ambulance = AmbulanceLocation.get_closest_ambulance(lat_a=init_from_lat,long_a=init_from_long)
 
             if closest_ambulance:

@@ -37,6 +37,7 @@ driver_app_server_key = 'AAAAlKBS6NA:APA91bH0Ba2YREHymJZ9W3UuazCdazFA3UWK6kBrL_8
 patient_app_server_key = 'AAAAWZOrdNw:APA91bFA620kxq-VNxk90qs6BKCkrCh1QAI6XRbhnuvpfwTr3ScjIQgo8GENrxdhJCOZYK7NWmO5hpKF_NvHoboPmXGkPz0mUiZrV3PQRJQQHBcgdE9QzvU1Y4yYKpT9mDrTuVvTVQXS'
 
 def send_driver_request_notification(user,trans):
+
     data={'transaction_id':trans.id,
           "area": get_area(trans.init_from_lat,trans.init_from_long),
           'title':'Request Notification'}

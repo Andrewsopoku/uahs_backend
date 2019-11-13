@@ -10,12 +10,12 @@ class FCM_Token(BaseModel):
 
     @classmethod
     def get_user_token(cls,auth_user):
+
         return get_object_or_none(cls,user=auth_user).token
 
     @classmethod
     def set_user_token(cls,auth_user,token):
-        # import pdb
-        # pdb.set_trace()
+
         user_token = get_object_or_none(cls,user = auth_user)
         if user_token:
             if user_token.token == token:

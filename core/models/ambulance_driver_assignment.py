@@ -14,4 +14,4 @@ class AmbulanceDriverAssignment(BaseModel):
 
     @classmethod
     def get_ambulance_driver(cls,ambulance):
-        return cls.objects.filter(ambulance = ambulance)[0]
+        return cls.objects.filter(ambulance = ambulance, status="Active")[0]
