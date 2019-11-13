@@ -17,7 +17,8 @@ def get_ambulance_initial_price(request):
 
             cityrate = AmbulanceRate.objects.filter(city=city)
             if cityrate:
-                response = json.dumps({'status': 'ok', 'price':str(get_price(cityrate[0],distance))})
+                response = json.dumps({'status': 'ok', 'standard_price':str(get_price(cityrate[0],distance,"standard")),
+                                       'deluxe_price': str(get_price(cityrate[0], distance,"deluxe"))})
 
 
         except Exception as ex:
@@ -28,7 +29,7 @@ def get_ambulance_initial_price(request):
     return HttpResponse(response, content_type='application/json')
 
 
-def get_price(cityrate,distance):
+def get_price(cityrate, distance, type="standard"):
 
     if eval(distance) <= eval(cityrate.minumum_distance):
         price = eval(cityrate.minumum_rate)
@@ -36,6 +37,8 @@ def get_price(cityrate,distance):
     else:
         price = eval(distance) * eval(cityrate.rate_per_minumum_distance)
 
+    if type == "deluxe":
+        price = price * eval(cityrate.deluxe_rate)
     return round(price,2)
 
 @csrf_exempt

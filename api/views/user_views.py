@@ -6,7 +6,8 @@ from django.contrib import messages
 from django.contrib.auth.models import User, Group
 from django.shortcuts import render
 
-from core.core_util import add_zeros, send_driver_request_notification, send_pin_register_patient
+from core.core_util import add_zeros, send_driver_request_notification, send_pin_register_patient, randomPassword, \
+    _sending__acc_reset_password
 from core.models.app_fcm_token import FCM_Token
 from core.models.auth_user_demographic import AuthUserDemographic
 
@@ -20,6 +21,8 @@ from django.shortcuts import render
 
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
+
+from core.models.base_model import get_object_or_none
 
 
 @csrf_exempt
@@ -70,23 +73,29 @@ def signin(request):
 def reset_password(request):
     if request.method == 'POST':
         user_id = request.POST.get('user_id','')
-        password = request.POST.get('newPassword','')
+        email = request.POST.get('email','')
 
-        if user_id and password:
-            demoUser = AuthUserDemographic.objects.get(id=user_id)
-            user = demoUser.user
-            user.set_password(password)
-            user.save()
-            demoUser.first_login = False
-            demoUser.save()
+        if user_id and email:
+            demoUser = get_object_or_none(AuthUserDemographic,id=user_id,email=email)
+            if demoUser:
+                password = randomPassword()
+                user = demoUser.user
+                user.set_password(password)
+                user.save()
+                demoUser.first_login = False
+                demoUser.save()
 
-            response = json.dumps({'status': 'ok', })
+                _sending__acc_reset_password(demoUser,password)
+            else:
+                response = json.dumps({'status': 'ok', "message":"User account does not exist"})
+
+            response = json.dumps({'status': 'ok', "message":"Account reset successfully. Please check your email"})
 
         else:
-                    response = json.dumps({'status': 'error', 'result': "Invalid data"})
+                    response = json.dumps({'status': 'error', 'message': "Invalid data"})
 
     else:
-        response = json.dumps({'status': 'error', 'result': "something went wrong"})
+        response = json.dumps({'status': 'error', 'message': "something went wrong"})
 
     return HttpResponse(response, content_type='application/json')
 

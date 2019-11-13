@@ -185,3 +185,14 @@ def _sending_enterprise_acc_creation_password(auth_user, password):
         Mail.send_message(to=auth_user.email, sender=sender, subject="UMobile Registration", message=message)
 
 
+def _sending__acc_reset_password(auth_user, password):
+    #registration = get_object_or_none(CompanyRegistration, pk=registration_id)
+        htmly = get_template('emails/account_reset_email.html')
+        d = {'firstname': auth_user.first_name, 'password': password,}
+        message = htmly.render(d)
+
+
+        Mail = Mailer()
+        Mail.send_message(to=auth_user.email, sender=sender, subject="UMobile Account", message=message)
+
+
