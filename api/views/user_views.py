@@ -1,5 +1,5 @@
 import datetime
-from random import random
+import random
 
 from countries_plus.models import Country
 from django.contrib import messages
@@ -72,11 +72,10 @@ def signin(request):
 @csrf_exempt
 def reset_password(request):
     if request.method == 'POST':
-        user_id = request.POST.get('user_id','')
         email = request.POST.get('email','')
 
-        if user_id and email:
-            demoUser = get_object_or_none(AuthUserDemographic,id=user_id,email=email)
+        if email:
+            demoUser = get_object_or_none(AuthUserDemographic,email=email)
             if demoUser:
                 password = randomPassword()
                 user = demoUser.user
